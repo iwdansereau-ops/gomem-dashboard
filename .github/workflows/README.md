@@ -1,7 +1,96 @@
 # CI: staging-memory-check
 
-Automated staging memory regression gate for Go services that use
-`gomem-dashboard`. On every successful deployment to the `staging`
+Automated staging memory regression gate for Go services. The logic is
+published as a **reusable workflow** in this repo
+(`staging-memory-check-reusable.yml`), so downstream services adopt it
+with a 6-line caller and never fork the pipeline.
+
+## Adopt in a downstream Go repo (6 lines)
+
+Drop this file at `.github/workflows/staging-memory-check.yml` in your
+service repo:
+
+```yaml
+name: staging-memory-check
+on:
+  deployment_status:
+jobs:
+  check:
+    uses: iwdansereau-ops/gomem-dashboard/.github/workflows/staging-memory-check-reusable.yml@v1
+    secrets:
+      pprof_url:   ${{ secrets.STAGING_PPROF_URL }}
+      pprof_token: ${{ secrets.STAGING_PPROF_TOKEN }}   # optional; delete if unauthenticated
+```
+
+That's it. Then in your service:
+
+1. Enable pprof: `import _ "net/http/pprof"` on a reachable port.
+2. Expose `/debug/memstats` (4-line handler in the top-level README).
+3. Add repo secrets `STAGING_PPROF_URL` (required) and
+   `STAGING_PPROF_TOKEN` (optional bearer token).
+4. Configure branch protection to require the
+   `staging-memory-check/verdict` context (see
+   [`scripts/ci/require-branch-protection.sh`](../../scripts/ci/require-branch-protection.sh)).
+
+### Versioning
+
+Pin the reusable workflow to a **released tag** (`@v1`, `@v1.2.3`), not
+`@main`, so breaking changes never appear silently on your critical path.
+The `v1` tag is moved forward for backwards-compatible additions; a
+`v2` tag will exist if we ever need to change inputs or verdict semantics.
+
+### Customising per-service
+
+All knobs are optional inputs. Override any of them in the `with:` block:
+
+```yaml
+jobs:
+  check:
+    uses: iwdansereau-ops/gomem-dashboard/.github/workflows/staging-memory-check-reusable.yml@v1
+    with:
+      gomem_ref:                v1.3.0     # pin the tooling version explicitly
+      snapshot_count:           7
+      snapshot_interval_seconds: 300        # 7 × 300s = 35 min
+      leak_threshold_bytes:     1048576    # 1 MB per function
+      environment:              staging-eu # match your deployment env name
+      status_context:           mem/eu     # gate branch protection on this name
+      runs_on:                  "self-hosted,staging-eu"
+      go_version:               "1.22"
+    secrets:
+      pprof_url:   ${{ secrets.STAGING_PPROF_URL_EU }}
+      pprof_token: ${{ secrets.STAGING_PPROF_TOKEN_EU }}
+```
+
+### Reading outputs from downstream jobs
+
+The caller can wire follow-up jobs (Slack notification, PagerDuty alert,
+dashboard refresh, …) to the verdict:
+
+```yaml
+jobs:
+  check:
+    uses: iwdansereau-ops/gomem-dashboard/.github/workflows/staging-memory-check-reusable.yml@v1
+    secrets: { pprof_url: ${{ secrets.STAGING_PPROF_URL }} }
+
+  notify:
+    needs: check
+    if: needs.check.outputs.has_regression == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Regression verdict: ${{ needs.check.outputs.verdict }}"
+          echo "Worst offender:     ${{ needs.check.outputs.worst_function }}"
+          # curl slack / pagerduty / …
+```
+
+Available outputs: `verdict`, `has_regression`, `worst_function`,
+`worst_bytes`.
+
+---
+
+## What the workflow does
+
+On every successful deployment to the `staging`
 environment it:
 
 1. Checks out the exact commit that was deployed.
@@ -48,28 +137,38 @@ environment it:
 
 ## Trigger surface
 
-- `deployment_status` — the default. Fires for **every** deployment event,
-  and the workflow gates on `state == 'success' && environment == 'staging'`.
-- `workflow_dispatch` — manual re-run. Optional `sha` and `pprof_url`
-  inputs let you rerun a check against an older commit or an ad-hoc host.
-- `workflow_run` — alternative for repos with their own "Deploy to staging"
-  workflow. See the commented block at the bottom of `staging-memory-check.yml`.
+The reusable workflow accepts whatever event the caller declares. The
+most common shapes:
+
+- `deployment_status` — the default. The reusable workflow gates on
+  `state == 'success' && environment == inputs.environment`.
+- `workflow_dispatch` — manual re-run. Forward `sha` / `pprof_url` from
+  the caller's inputs into the reusable workflow's `override_sha` /
+  `override_pprof_url` inputs.
+- `workflow_run` — fire after your own "Deploy to staging" workflow
+  succeeds. Set `environment: <yours>` on the caller and gate the
+  caller's `jobs.check.if` on `github.event.workflow_run.conclusion == 'success'`.
 
 ## Threshold configuration
 
-Both knobs live in the workflow's `env:` block:
+Pass these as `with:` inputs on the caller (defaults shown):
 
 ```yaml
-env:
-  SNAPSHOT_COUNT: "5"
-  SNAPSHOT_INTERVAL_SECONDS: "180"   # 5 × 180s = 15 min
-  LEAK_THRESHOLD_BYTES: "512000"     # 500 KB
+with:
+  snapshot_count:           5
+  snapshot_interval_seconds: 180   # 5 × 180s = 15 min
+  leak_threshold_bytes:     512000 # 500 KB per-function flat_delta
 ```
 
-Change `LEAK_THRESHOLD_BYTES` to tune sensitivity per service. The evaluator
-compares against the **flat delta** (bytes allocated *by that function*,
-not through it) — so `runProcessor` won't trip the alarm just because it
-calls a leaky child.
+The evaluator compares against the **flat delta** (bytes allocated *by
+that function*, not through it) — so `runProcessor` won't trip the alarm
+just because it calls a leaky child.
+
+Separately, the churn classifier has fixed thresholds (churn ratio 20×,
+GC ≥ 1/s, alloc ≥ 5 MB/s) hard-coded in `evaluate_leak.py`. Fork if you
+need to change those — they're not part of the workflow's input surface
+because the values above are what actually distinguish thrash from
+normal Go behaviour, and per-service overrides tend to hide problems.
 
 ## Dry-run locally
 

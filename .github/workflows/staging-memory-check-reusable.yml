@@ -1,0 +1,410 @@
+# .github/workflows/staging-memory-check-reusable.yml
+#
+# Reusable Go memory-regression gate. Callers pass their staging pprof URL as
+# a secret and the workflow does everything: captures 5 heap + GC snapshots,
+# runs the retention/churn classifier, posts a sticky PR comment, and
+# publishes a blocking `staging-memory-check/verdict` commit status on the
+# PR's head SHA.
+#
+# The tooling (gomem CLI, evaluate_leak.py, auth-proxy.sh) is fetched from
+# iwdansereau-ops/gomem-dashboard@<gomem_ref> — callers pin a version so
+# breaking changes never appear silently in their CI.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Minimal caller (6 lines of logic):
+#
+#     name: staging-memory-check
+#     on:
+#       deployment_status:
+#     jobs:
+#       check:
+#         uses: iwdansereau-ops/gomem-dashboard/.github/workflows/staging-memory-check-reusable.yml@v1
+#         secrets:
+#           pprof_url: ${{ secrets.STAGING_PPROF_URL }}
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: staging-memory-check (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      # --- version pin for the gomem tooling ------------------------------
+      gomem_ref:
+        description: "Git ref (tag / branch / SHA) of iwdansereau-ops/gomem-dashboard to build gomem from."
+        required: false
+        type: string
+        default: "v1"
+
+      # --- capture knobs --------------------------------------------------
+      snapshot_count:
+        description: "Number of heap + GC snapshots to capture."
+        required: false
+        type: number
+        default: 5
+      snapshot_interval_seconds:
+        description: "Seconds between snapshots. Default 180 → 5×180s = 15 min."
+        required: false
+        type: number
+        default: 180
+      leak_threshold_bytes:
+        description: "Per-function flat-delta bytes above which a retention leak is declared. Default 512000 (500 KB)."
+        required: false
+        type: number
+        default: 512000
+
+      # --- routing --------------------------------------------------------
+      environment:
+        description: "Deployment environment name to gate on (only used when triggered by deployment_status)."
+        required: false
+        type: string
+        default: "staging"
+      status_context:
+        description: "GitHub commit-status context to publish. Match this in branch protection required-checks."
+        required: false
+        type: string
+        default: "staging-memory-check/verdict"
+      runs_on:
+        description: "Runner label. Use e.g. 'self-hosted,staging-network' if staging is only reachable internally."
+        required: false
+        type: string
+        default: "ubuntu-latest"
+
+      # --- go version -----------------------------------------------------
+      go_version:
+        description: "Go version to build gomem with."
+        required: false
+        type: string
+        default: "1.22"
+
+      # --- optional per-invocation overrides ------------------------------
+      # These come from workflow_dispatch on the *caller* side and are forwarded
+      # in as regular inputs so a manual re-run can target an older SHA.
+      override_sha:
+        description: "SHA to check out (defaults to the deployed SHA or github.sha)."
+        required: false
+        type: string
+        default: ""
+      override_pprof_url:
+        description: "Override pprof base URL for a manual dispatch (secret still takes precedence when set)."
+        required: false
+        type: string
+        default: ""
+
+    secrets:
+      pprof_url:
+        description: "Base URL of the staging pprof endpoint, e.g. https://staging.internal:6060."
+        required: true
+      pprof_token:
+        description: "Optional bearer token for /debug/pprof and /debug/memstats."
+        required: false
+
+    outputs:
+      verdict:
+        description: "One of CLEAN | RETENTION_LEAK | ALLOC_CHURN | MIXED (empty on early failure)."
+        value: ${{ jobs.memory-check.outputs.verdict }}
+      has_regression:
+        description: "true iff verdict != CLEAN."
+        value: ${{ jobs.memory-check.outputs.has_regression }}
+      worst_function:
+        description: "Worst retention offender by flat_delta (empty for pure churn)."
+        value: ${{ jobs.memory-check.outputs.worst_function }}
+      worst_bytes:
+        description: "flat_delta of the worst retention offender, in bytes."
+        value: ${{ jobs.memory-check.outputs.worst_bytes }}
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: read
+  actions: read
+  statuses: write
+
+jobs:
+  memory-check:
+    if: >
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == inputs.environment)
+    runs-on: ${{ inputs.runs_on }}
+    timeout-minutes: 30
+
+    outputs:
+      verdict:        ${{ steps.eval.outputs.verdict }}
+      has_regression: ${{ steps.eval.outputs.has_regression }}
+      worst_function: ${{ steps.eval.outputs.worst_function }}
+      worst_bytes:    ${{ steps.eval.outputs.worst_bytes }}
+
+    env:
+      # Effective pprof URL: secret wins, else the override input (only set on
+      # manual dispatch). This lets the caller either configure secrets once,
+      # or re-run against an ad-hoc host without touching secrets.
+      PPROF_URL: ${{ secrets.pprof_url || inputs.override_pprof_url }}
+
+    steps:
+      # ── 1. Resolve which commit was actually deployed ──────────────────
+      - name: Resolve deployed SHA
+        id: sha
+        run: |
+          set -euo pipefail
+          if [[ -n "${{ inputs.override_sha }}" ]]; then
+            SHA="${{ inputs.override_sha }}"
+          elif [[ "${{ github.event_name }}" == "deployment_status" ]]; then
+            SHA="${{ github.event.deployment.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            SHA="${{ github.event.workflow_run.head_sha }}"
+          else
+            SHA="${{ github.sha }}"
+          fi
+          echo "sha=$SHA"                >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHA:0:7}"    >> "$GITHUB_OUTPUT"
+          echo "Deployed SHA: $SHA"
+
+      # ── 2. Check out the *caller's* repo at the deployed SHA ───────────
+      #      Not strictly needed to run the check (gomem is external), but
+      #      lets us include source references + `git show` snippets in the
+      #      remediation report.
+      - name: Checkout caller repo at deployed revision
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ steps.sha.outputs.sha }}
+          fetch-depth: 1
+          path: caller
+
+      # ── 3. Check out this workflow's own tooling at the pinned ref ─────
+      - name: Checkout gomem tooling
+        uses: actions/checkout@v4
+        with:
+          repository: iwdansereau-ops/gomem-dashboard
+          ref: ${{ inputs.gomem_ref }}
+          fetch-depth: 1
+          path: gomem-src
+
+      # ── 4. Build the gomem CLI from the pinned tooling checkout ────────
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ inputs.go_version }}
+          cache: true
+          cache-dependency-path: gomem-src/go.sum
+
+      - name: Build gomem
+        run: |
+          set -euo pipefail
+          mkdir -p bin
+          go build -C gomem-src -o "$GITHUB_WORKSPACE/bin/gomem" ./cmd/gomem
+          echo "gomem version: $(./bin/gomem 2>&1 | head -1)"
+
+      # ── 5. Discover the associated PR + head SHA ───────────────────────
+      - name: Resolve associated PR
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          SHA: ${{ steps.sha.outputs.sha }}
+        run: |
+          set -euo pipefail
+          PR_JSON=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/commits/${SHA}/pulls" \
+            --jq '[.[] | select(.state=="open")] + [.[] | select(.state!="open")]')
+          PR_NUMBER=$(echo "$PR_JSON"  | jq -r '.[0].number // empty')
+          PR_URL=$(echo "$PR_JSON"     | jq -r '.[0].html_url // empty')
+          PR_HEAD_SHA=$(echo "$PR_JSON"| jq -r '.[0].head.sha // empty')
+          if [[ -z "$PR_NUMBER" ]]; then
+            echo "No PR associated with $SHA — will run the check and upload artifacts, skip PR comment / status."
+          else
+            echo "Associated PR: #$PR_NUMBER ($PR_URL); head SHA: $PR_HEAD_SHA"
+          fi
+          echo "number=$PR_NUMBER"     >> "$GITHUB_OUTPUT"
+          echo "url=$PR_URL"           >> "$GITHUB_OUTPUT"
+          echo "head_sha=$PR_HEAD_SHA" >> "$GITHUB_OUTPUT"
+
+      # ── 6. Announce pending immediately so the PR shows a yellow dot ───
+      - name: Publish "pending" commit status on PR head
+        if: steps.pr.outputs.head_sha != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          CONTEXT: ${{ inputs.status_context }}
+        run: |
+          set -euo pipefail
+          # Cap description at 140 chars per GitHub's Statuses API.
+          DESC="Capturing ${{ inputs.snapshot_count }} heap+GC snapshots over $(( ${{ inputs.snapshot_count }} * ${{ inputs.snapshot_interval_seconds }} ))s…"
+          DESC="${DESC:0:140}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}" \
+            -f state=pending \
+            -f context="$CONTEXT" \
+            -f description="$DESC" \
+            -f target_url="$RUN_URL"
+
+      # ── 7. Pre-flight the pprof endpoint ───────────────────────────────
+      - name: Pre-flight — reach pprof endpoint
+        env:
+          PPROF_TOKEN: ${{ secrets.pprof_token }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${PPROF_URL:-}" ]]; then
+            echo "::error::pprof_url secret is not set. Pass secrets: pprof_url from the caller workflow."
+            exit 1
+          fi
+          AUTH=()
+          [[ -n "${PPROF_TOKEN:-}" ]] && AUTH=(-H "Authorization: Bearer $PPROF_TOKEN")
+          if ! curl -fsS --max-time 15 "${AUTH[@]}" "$PPROF_URL/debug/pprof/" -o /dev/null; then
+            echo "::error::Cannot reach $PPROF_URL/debug/pprof/. Is net/http/pprof enabled and reachable from this runner?"
+            exit 1
+          fi
+          echo "pprof endpoint OK"
+
+      # ── 8. Capture snapshots ───────────────────────────────────────────
+      - name: Capture heap + GC snapshots
+        env:
+          PPROF_TOKEN: ${{ secrets.pprof_token }}
+        run: |
+          set -euo pipefail
+          mkdir -p profiles reports
+          if [[ -n "${PPROF_TOKEN:-}" ]]; then
+            echo "Starting local auth proxy on :17070 → $PPROF_URL"
+            nohup gomem-src/scripts/ci/auth-proxy.sh "$PPROF_URL" "$PPROF_TOKEN" 17070 \
+              > proxy.log 2>&1 &
+            sleep 2
+            TARGET="http://127.0.0.1:17070"
+          else
+            TARGET="$PPROF_URL"
+          fi
+          ./bin/gomem capture \
+            --url "$TARGET" \
+            --dir ./profiles \
+            --interval "${{ inputs.snapshot_interval_seconds }}s" \
+            --count "${{ inputs.snapshot_count }}"
+
+      # ── 9. Diff + report ──────────────────────────────────────────────
+      - name: Generate diff + remediation reports
+        run: |
+          set -euo pipefail
+          ./bin/gomem report --dir ./profiles --out ./reports --top 5
+          ls -la reports/
+
+      # ── 10. Classify (retention leak vs churn vs clean) ───────────────
+      - name: Evaluate threshold + classify verdict
+        id: eval
+        env:
+          SHA: ${{ steps.sha.outputs.sha }}
+          SHORT_SHA: ${{ steps.sha.outputs.short_sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          THRESHOLD: ${{ inputs.leak_threshold_bytes }}
+        run: |
+          set -euo pipefail
+          python3 gomem-src/scripts/ci/evaluate_leak.py \
+            --reports-dir ./reports \
+            --profiles-dir ./profiles \
+            --threshold-bytes "$THRESHOLD" \
+            --sha "$SHA" \
+            --short-sha "$SHORT_SHA" \
+            --run-url "$RUN_URL" \
+            --out-comment ./reports/pr-comment.md \
+            --out-summary "$GITHUB_STEP_SUMMARY" \
+          | tee eval.json
+          jq -r '"has_regression="   + (.has_regression|tostring)'     eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"worst_bytes="      + (.worst_bytes|tostring)'         eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"worst_function="   + (.worst_function|tostring)'      eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"total_delta_bytes=" + (.total_delta_bytes|tostring)'  eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"verdict="          + (.verdict|tostring)'             eval.json >> "$GITHUB_OUTPUT"
+
+      # ── 11. Always upload artifacts, even on early failure ─────────────
+      - name: Upload profiles + reports as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gomem-staging-${{ steps.sha.outputs.short_sha }}
+          path: |
+            profiles/**
+            reports/**
+          retention-days: 14
+          if-no-files-found: warn
+
+      # ── 12. Publish the final blocking status ──────────────────────────
+      - name: Publish verdict commit status on PR head
+        if: always() && steps.pr.outputs.head_sha != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          VERDICT: ${{ steps.eval.outputs.verdict }}
+          WORST_FUNC: ${{ steps.eval.outputs.worst_function }}
+          WORST_BYTES: ${{ steps.eval.outputs.worst_bytes }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+          CONTEXT: ${{ inputs.status_context }}
+        run: |
+          set -euo pipefail
+          case "${VERDICT:-}" in
+            CLEAN)
+              STATE=success
+              DESC="No memory regression on this deploy."
+              ;;
+            RETENTION_LEAK)
+              STATE=failure
+              DESC="Retention leak: ${WORST_FUNC:-unknown} +${WORST_BYTES:-?} B (flat)."
+              ;;
+            ALLOC_CHURN)
+              STATE=failure
+              DESC="Allocation churn / GC thrash detected."
+              ;;
+            MIXED)
+              STATE=failure
+              DESC="Retention leak + allocation churn detected."
+              ;;
+            *)
+              STATE=error
+              DESC="Memory evaluator failed to produce a verdict — see workflow log."
+              ;;
+          esac
+          DESC="${DESC:0:140}"
+          echo "Publishing status: state=$STATE verdict=${VERDICT:-<none>} context=$CONTEXT"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}" \
+            -f state="$STATE" \
+            -f context="$CONTEXT" \
+            -f description="$DESC" \
+            -f target_url="${PR_URL:-$RUN_URL}"
+
+      # ── 13. Post / update the sticky PR comment ────────────────────────
+      - name: Post / update sticky PR comment
+        if: steps.pr.outputs.number != ''
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN || github.token }}
+          script: |
+            const fs   = require('fs');
+            const body = fs.readFileSync('./reports/pr-comment.md', 'utf8');
+            const marker = '<!-- gomem-staging-memory-check -->';
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+            const { owner, repo } = context.repo;
+            const existing = await github.paginate(
+              github.rest.issues.listComments,
+              { owner, repo, issue_number: prNumber, per_page: 100 }
+            );
+            const prior = existing.find(c => c.body && c.body.includes(marker));
+            if (prior) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: prior.id, body });
+              core.info(`Updated sticky comment #${prior.id}`);
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: prNumber, body });
+              core.info('Posted new sticky comment');
+            }
+
+      # ── 14. Fail the job on regression ────────────────────────────────
+      #      Keeps the workflow-run "conclusion" red on top of the commit
+      #      status, so callers see it in the Actions tab too.
+      - name: Fail the job on regression
+        if: steps.eval.outputs.has_regression == 'true'
+        run: |
+          echo "::error::Memory regression [${{ steps.eval.outputs.verdict }}] on ${{ steps.sha.outputs.short_sha }} — worst offender: ${{ steps.eval.outputs.worst_function }} (${{ steps.eval.outputs.worst_bytes }} bytes flat). See PR comment ${{ steps.pr.outputs.url }} or the workflow summary."
+          exit 1

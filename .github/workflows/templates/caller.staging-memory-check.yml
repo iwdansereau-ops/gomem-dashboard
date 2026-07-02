@@ -1,0 +1,14 @@
+# Drop this file at .github/workflows/staging-memory-check.yml in any Go repo
+# that deploys to a staging environment exposing /debug/pprof and /debug/memstats.
+#
+# Six lines of caller logic (the top-of-file `name` + `on:` are boilerplate):
+
+name: staging-memory-check
+on:
+  deployment_status:
+jobs:
+  check:
+    uses: iwdansereau-ops/gomem-dashboard/.github/workflows/staging-memory-check-reusable.yml@v1
+    secrets:
+      pprof_url:   ${{ secrets.STAGING_PPROF_URL }}
+      pprof_token: ${{ secrets.STAGING_PPROF_TOKEN }}   # optional; delete if endpoint is unauthenticated
