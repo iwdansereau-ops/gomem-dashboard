@@ -1,0 +1,7 @@
+bin/
+profiles/
+profiles_*/
+reports/
+reports_*/
+*.log
+.DS_Store

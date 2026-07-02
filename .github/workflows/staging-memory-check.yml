@@ -1,0 +1,358 @@
+# .github/workflows/staging-memory-check.yml
+#
+# Fires after a successful deployment to the `staging` environment, captures
+# 5 heap profiles from the deployed Go processor over 15 minutes, diffs the
+# first and last snapshots, and — if any single function retained more than
+# 500 KB of inuse_space — posts a sticky comment on the associated PR listing
+# the top 5 leaking functions with their source file:line references.
+#
+# Deployment tools that trigger this automatically:
+#   - GitHub Environments (deployments API): any tool that creates a Deployment
+#     and marks it success (Argo CD, Flux, Spinnaker, Octopus, custom bots).
+#   - GitHub-native "deploy to staging" workflow: change the trigger to
+#     `workflow_run` (see the commented block at the bottom of this file).
+#
+# Requires two repo secrets / variables:
+#   STAGING_PPROF_URL     — e.g. https://staging-processor.internal:6060
+#   STAGING_PPROF_TOKEN   — optional bearer token for /debug/pprof (recommended)
+#
+# Permissions justification:
+#   contents: read       — checkout
+#   pull-requests: write — post/edit the sticky PR comment
+#   deployments: read    — enrich the deployment event
+#   actions: read        — download artifacts across runs (optional)
+#   statuses: write      — publish a named commit status on the PR head SHA so
+#                          branch-protection rules can require this check.
+#
+# Branch protection:
+#   This workflow publishes a commit status named
+#   `staging-memory-check/verdict` on the PR's head commit. Add that context
+#   to the required-status-checks list on your protected branch (see
+#   scripts/ci/require-branch-protection.sh) to block merges whenever the
+#   verdict is RETENTION_LEAK, ALLOC_CHURN, or MIXED. Admins can override by
+#   temporarily disabling the rule or (if `enforce_admins` is off) using the
+#   merge-anyway button.
+
+name: staging-memory-check
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: "Commit SHA that was deployed to staging (defaults to HEAD)"
+        required: false
+        type: string
+      pprof_url:
+        description: "Override pprof base URL (defaults to STAGING_PPROF_URL secret)"
+        required: false
+        type: string
+
+concurrency:
+  # Never run two memory checks against staging in parallel — they'd fight for
+  # the same profile endpoint and produce noisy diffs.
+  group: staging-memory-check
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: read
+  actions: read
+  statuses: write
+
+jobs:
+  memory-check:
+    # Only run for successful staging deploys — every deployment_status event
+    # (queued, in_progress, failure, …) hits this workflow, so gate hard.
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'staging')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      SNAPSHOT_COUNT: "5"
+      SNAPSHOT_INTERVAL_SECONDS: "180"   # 5 × 180s = 15 min
+      LEAK_THRESHOLD_BYTES: "512000"     # 500 KB (500 × 1024 = 512000)
+      PPROF_URL: ${{ github.event.inputs.pprof_url || secrets.STAGING_PPROF_URL }}
+
+    steps:
+      - name: Resolve deployed SHA
+        id: sha
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            SHA="${{ github.event.inputs.sha }}"
+            [[ -z "$SHA" ]] && SHA="${{ github.sha }}"
+          else
+            SHA="${{ github.event.deployment.sha }}"
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHA:0:7}" >> "$GITHUB_OUTPUT"
+          echo "Deployed SHA: $SHA"
+
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.sha.outputs.sha }}
+          fetch-depth: 1
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache: true
+
+      - name: Build gomem
+        run: go build -o bin/gomem ./cmd/gomem
+
+      - name: Resolve associated PR
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ steps.sha.outputs.sha }}
+        run: |
+          set -euo pipefail
+          # /repos/{owner}/{repo}/commits/{sha}/pulls returns every PR whose
+          # HEAD is this SHA *or* whose merge_commit_sha is this SHA. That
+          # covers both "PR still open" and "squash-merged just deployed".
+          PR_JSON=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/commits/${SHA}/pulls" \
+            --jq '[.[] | select(.state=="open")] + [.[] | select(.state!="open")]')
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r '.[0].number // empty')
+          PR_URL=$(echo "$PR_JSON"    | jq -r '.[0].html_url // empty')
+          # Head SHA of the PR — used to publish the branch-protection status.
+          # This is what a reviewer's browser sees on the "Files changed" tab,
+          # so we must post the status there even though the deploy ran on the
+          # merge commit.
+          PR_HEAD_SHA=$(echo "$PR_JSON" | jq -r '.[0].head.sha // empty')
+          if [[ -z "$PR_NUMBER" ]]; then
+            echo "No PR is associated with $SHA — will still run the check and upload artifacts, but skip the PR comment / status."
+          else
+            echo "Associated PR: #$PR_NUMBER ($PR_URL); head SHA: $PR_HEAD_SHA"
+          fi
+          echo "number=$PR_NUMBER"       >> "$GITHUB_OUTPUT"
+          echo "url=$PR_URL"             >> "$GITHUB_OUTPUT"
+          echo "head_sha=$PR_HEAD_SHA"   >> "$GITHUB_OUTPUT"
+
+      - name: Publish "pending" commit status on PR head
+        # Announce the check as pending immediately so the PR shows a
+        # yellow dot while we capture 15 minutes of profiles, rather than
+        # nothing at all. Skipped when we couldn't resolve a PR.
+        if: steps.pr.outputs.head_sha != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+        run: |
+          set -euo pipefail
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}" \
+            -f state=pending \
+            -f context="staging-memory-check/verdict" \
+            -f description="Capturing 5 heap+GC snapshots over 15 min…" \
+            -f target_url="$RUN_URL"
+
+      - name: Pre-flight — reach pprof endpoint
+        env:
+          PPROF_TOKEN: ${{ secrets.STAGING_PPROF_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${PPROF_URL:-}" ]]; then
+            echo "::error::STAGING_PPROF_URL is not set. Add it under Settings → Secrets or pass pprof_url via workflow_dispatch."
+            exit 1
+          fi
+          AUTH=()
+          [[ -n "${PPROF_TOKEN:-}" ]] && AUTH=(-H "Authorization: Bearer $PPROF_TOKEN")
+          if ! curl -fsS --max-time 15 "${AUTH[@]}" "$PPROF_URL/debug/pprof/" -o /dev/null; then
+            echo "::error::Cannot reach $PPROF_URL/debug/pprof/. Is net/http/pprof enabled and reachable from GitHub-hosted runners?"
+            exit 1
+          fi
+          echo "pprof endpoint OK"
+
+      - name: Capture 5 heap snapshots over 15 minutes
+        env:
+          PPROF_TOKEN: ${{ secrets.STAGING_PPROF_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p profiles reports
+          # If the endpoint requires auth, tunnel through a tiny proxy that
+          # adds the header. `gomem capture` speaks plain HTTP so we don't
+          # want to bake auth into the CLI.
+          if [[ -n "${PPROF_TOKEN:-}" ]]; then
+            echo "Starting local auth proxy on :17070 → $PPROF_URL"
+            nohup ./scripts/ci/auth-proxy.sh "$PPROF_URL" "$PPROF_TOKEN" 17070 \
+              > proxy.log 2>&1 &
+            sleep 2
+            TARGET="http://127.0.0.1:17070"
+          else
+            TARGET="$PPROF_URL"
+          fi
+          ./bin/gomem capture \
+            --url "$TARGET" \
+            --dir ./profiles \
+            --interval "${SNAPSHOT_INTERVAL_SECONDS}s" \
+            --count "$SNAPSHOT_COUNT"
+
+      - name: Generate diff + remediation reports
+        run: |
+          set -euo pipefail
+          ./bin/gomem report --dir ./profiles --out ./reports --top 5
+          ls -la reports/
+
+      - name: Evaluate 500 KB threshold and build PR comment
+        id: eval
+        env:
+          SHA: ${{ steps.sha.outputs.sha }}
+          SHORT_SHA: ${{ steps.sha.outputs.short_sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          THRESHOLD: ${{ env.LEAK_THRESHOLD_BYTES }}
+        run: |
+          set -euo pipefail
+          python3 scripts/ci/evaluate_leak.py \
+            --reports-dir ./reports \
+            --profiles-dir ./profiles \
+            --threshold-bytes "$THRESHOLD" \
+            --sha "$SHA" \
+            --short-sha "$SHORT_SHA" \
+            --run-url "$RUN_URL" \
+            --out-comment ./reports/pr-comment.md \
+            --out-summary "$GITHUB_STEP_SUMMARY" \
+          | tee eval.json
+          # Expose booleans + numbers to later steps.
+          jq -r '"has_regression=" + (.has_regression|tostring)' eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"worst_bytes=" + (.worst_bytes|tostring)'     eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"worst_function=" + (.worst_function|tostring)' eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"total_delta_bytes=" + (.total_delta_bytes|tostring)' eval.json >> "$GITHUB_OUTPUT"
+          jq -r '"verdict=" + (.verdict|tostring)' eval.json >> "$GITHUB_OUTPUT"
+
+      - name: Upload profiles + reports as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gomem-staging-${{ steps.sha.outputs.short_sha }}
+          path: |
+            profiles/**
+            reports/**
+          retention-days: 14
+          if-no-files-found: warn
+
+      - name: Publish verdict commit status on PR head
+        # Blocking status check for branch protection. `state=failure` on any
+        # non-CLEAN verdict (RETENTION_LEAK / ALLOC_CHURN / MIXED); `success`
+        # otherwise. Runs even on error so the PR always ends up with an
+        # up-to-date status instead of a stuck yellow "pending" dot.
+        if: always() && steps.pr.outputs.head_sha != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          VERDICT: ${{ steps.eval.outputs.verdict }}
+          HAS_REGRESSION: ${{ steps.eval.outputs.has_regression }}
+          WORST_FUNC: ${{ steps.eval.outputs.worst_function }}
+          WORST_BYTES: ${{ steps.eval.outputs.worst_bytes }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+        run: |
+          set -euo pipefail
+          # State machine:
+          #   CLEAN                              → success
+          #   RETENTION_LEAK / ALLOC_CHURN /
+          #     MIXED                            → failure  (blocks merge)
+          #   evaluator did not run              → error    (blocks merge, distinct dot)
+          case "${VERDICT:-}" in
+            CLEAN)
+              STATE=success
+              DESC="No memory regression on this deploy."
+              ;;
+            RETENTION_LEAK)
+              STATE=failure
+              DESC="Retention leak: ${WORST_FUNC:-unknown} +${WORST_BYTES:-?} B (flat)."
+              ;;
+            ALLOC_CHURN)
+              STATE=failure
+              DESC="Allocation churn / GC thrash detected."
+              ;;
+            MIXED)
+              STATE=failure
+              DESC="Retention leak + allocation churn detected."
+              ;;
+            *)
+              STATE=error
+              DESC="Memory evaluator failed to produce a verdict — see workflow log."
+              ;;
+          esac
+          # GitHub caps status description at 140 chars.
+          DESC="${DESC:0:140}"
+          echo "Publishing status: state=$STATE verdict=${VERDICT:-<none>} desc=$DESC"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}" \
+            -f state="$STATE" \
+            -f context="staging-memory-check/verdict" \
+            -f description="$DESC" \
+            -f target_url="${PR_URL:-$RUN_URL}"
+
+      - name: Post / update sticky PR comment
+        # Only comment when (a) we found a PR, (b) there is a regression to report.
+        # For clean runs we still update the sticky comment if one already exists,
+        # so the PR reflects the *latest* deploy result instead of a stale warning.
+        if: steps.pr.outputs.number != ''
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          HAS_REGRESSION: ${{ steps.eval.outputs.has_regression }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs   = require('fs');
+            const body = fs.readFileSync('./reports/pr-comment.md', 'utf8');
+            const marker = '<!-- gomem-staging-memory-check -->';
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+            const { owner, repo } = context.repo;
+
+            // Look for an existing sticky comment.
+            const existing = await github.paginate(
+              github.rest.issues.listComments,
+              { owner, repo, issue_number: prNumber, per_page: 100 }
+            );
+            const prior = existing.find(c => c.body && c.body.includes(marker));
+
+            if (prior) {
+              await github.rest.issues.updateComment({
+                owner, repo, comment_id: prior.id, body,
+              });
+              core.info(`Updated sticky comment #${prior.id}`);
+            } else {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: prNumber, body,
+              });
+              core.info('Posted new sticky comment');
+            }
+
+      - name: Fail the job on regression
+        if: steps.eval.outputs.has_regression == 'true'
+        run: |
+          echo "::error::Memory regression [${{ steps.eval.outputs.verdict }}] on ${{ steps.sha.outputs.short_sha }} — worst offender: ${{ steps.eval.outputs.worst_function }} (${{ steps.eval.outputs.worst_bytes }} bytes flat). See PR comment ${{ steps.pr.outputs.url }} or the workflow summary."
+          exit 1
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Alternative trigger: run after your own "Deploy to staging" workflow succeeds
+# instead of subscribing to Deployment API events. Remove the `deployment_status`
+# trigger above and use this block:
+#
+# on:
+#   workflow_run:
+#     workflows: ["Deploy to staging"]     # <- your deploy workflow's name
+#     types: [completed]
+#     branches: [main]
+#
+# Then gate the job with:
+#   if: github.event.workflow_run.conclusion == 'success'
+# and read the SHA from github.event.workflow_run.head_sha.
+# ─────────────────────────────────────────────────────────────────────────────
