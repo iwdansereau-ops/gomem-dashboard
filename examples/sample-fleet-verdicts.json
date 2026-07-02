@@ -1,0 +1,137 @@
+{
+  "generated_at": "2026-07-02T05:59:41Z",
+  "scope": "org/example-corp",
+  "counts": {
+    "total": 14,
+    "with_workflow": 12,
+    "regressing": 4,
+    "clean": 7,
+    "unknown": 1,
+    "no_data": 2
+  },
+  "repos": [
+    {
+      "full_name": "example-corp/order-router",
+      "default_branch": "main",
+      "workflow_configured": true,
+      "worst_verdict": "RETENTION_LEAK",
+      "has_regression": true,
+      "default_branch_verdict": {
+        "verdict": "CLEAN", "state": "success",
+        "sha": "8f4c1e29b1a3d40aac1a6c7b90aa11c2f0553aab",
+        "short_sha": "8f4c1e2",
+        "description": "No memory regression on this deploy.",
+        "target_url": "https://github.com/example-corp/order-router/actions/runs/42041",
+        "updated_at": "2026-07-02T05:41:03Z",
+        "worst_function": null, "worst_bytes": null
+      },
+      "pr_verdicts": [
+        {
+          "verdict": "RETENTION_LEAK", "state": "failure",
+          "sha": "c17aa72b0a99b1d6e33e14ef6f2a2c0d4a72b111",
+          "short_sha": "c17aa72",
+          "description": "Retention leak: (*orderCache).Put +812432 B (flat).",
+          "target_url": "https://github.com/example-corp/order-router/actions/runs/42088",
+          "updated_at": "2026-07-02T05:56:17Z",
+          "worst_function": "(*orderCache).Put",
+          "worst_bytes": 812432,
+          "pr_number": 913,
+          "pr_title": "cache orders by tenant id",
+          "pr_url": "https://github.com/example-corp/order-router/pull/913"
+        }
+      ]
+    },
+    {
+      "full_name": "example-corp/payment-gateway",
+      "default_branch": "main",
+      "workflow_configured": true,
+      "worst_verdict": "MIXED",
+      "has_regression": true,
+      "default_branch_verdict": {
+        "verdict": "MIXED", "state": "failure",
+        "sha": "2a0f8d70b111e2d3f5c6b7d81ee2f9a0c4d5e6f7",
+        "short_sha": "2a0f8d7",
+        "description": "Retention leak + allocation churn detected.",
+        "target_url": "https://github.com/example-corp/payment-gateway/actions/runs/91221",
+        "updated_at": "2026-07-02T05:12:44Z",
+        "worst_function": "(*txnCoalescer).flush",
+        "worst_bytes": 1567800
+      },
+      "pr_verdicts": []
+    },
+    {
+      "full_name": "example-corp/notifier",
+      "default_branch": "main",
+      "workflow_configured": true,
+      "worst_verdict": "ALLOC_CHURN",
+      "has_regression": true,
+      "default_branch_verdict": {
+        "verdict": "CLEAN", "state": "success",
+        "sha": "d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0",
+        "short_sha": "d1e2f3a",
+        "description": "No memory regression on this deploy.",
+        "target_url": "https://github.com/example-corp/notifier/actions/runs/17801",
+        "updated_at": "2026-07-01T22:03:11Z",
+        "worst_function": null, "worst_bytes": null
+      },
+      "pr_verdicts": [
+        {
+          "verdict": "ALLOC_CHURN", "state": "failure",
+          "sha": "aa11bb22cc33dd44ee55ff66aa77bb88cc99dd00",
+          "short_sha": "aa11bb2",
+          "description": "Allocation churn / GC thrash detected.",
+          "target_url": "https://github.com/example-corp/notifier/actions/runs/17845",
+          "updated_at": "2026-07-02T04:48:29Z",
+          "worst_function": null, "worst_bytes": null,
+          "pr_number": 214,
+          "pr_title": "switch to fan-out worker pool",
+          "pr_url": "https://github.com/example-corp/notifier/pull/214"
+        }
+      ]
+    },
+    {
+      "full_name": "example-corp/warehouse-sync",
+      "default_branch": "main",
+      "workflow_configured": true,
+      "worst_verdict": "RETENTION_LEAK",
+      "has_regression": true,
+      "default_branch_verdict": {
+        "verdict": "RETENTION_LEAK", "state": "failure",
+        "sha": "9988aa77bb66cc55dd44ee33ff22aa11bb00cc99",
+        "short_sha": "9988aa7",
+        "description": "Retention leak: (*shelfIndex).snapshot +348901 B (flat).",
+        "target_url": "https://github.com/example-corp/warehouse-sync/actions/runs/56010",
+        "updated_at": "2026-07-02T05:33:52Z",
+        "worst_function": "(*shelfIndex).snapshot",
+        "worst_bytes": 348901
+      },
+      "pr_verdicts": []
+    },
+    {
+      "full_name": "example-corp/api-gateway",
+      "default_branch": "main",
+      "workflow_configured": true,
+      "worst_verdict": "UNKNOWN",
+      "has_regression": false,
+      "default_branch_verdict": {
+        "verdict": "UNKNOWN", "state": "error",
+        "sha": "abcdef1234567890abcdef1234567890abcdef12",
+        "short_sha": "abcdef1",
+        "description": "Memory evaluator failed to produce a verdict — see workflow log.",
+        "target_url": "https://github.com/example-corp/api-gateway/actions/runs/33021",
+        "updated_at": "2026-07-02T05:22:00Z",
+        "worst_function": null, "worst_bytes": null
+      },
+      "pr_verdicts": []
+    },
+    { "full_name": "example-corp/user-service",   "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"1111","short_sha":"1111","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:00:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/billing",        "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"2222","short_sha":"2222","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:01:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/audit-log",      "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"3333","short_sha":"3333","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:02:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/search-indexer", "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"4444","short_sha":"4444","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:03:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/cart",           "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"5555","short_sha":"5555","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:04:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/promo-engine",   "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"6666","short_sha":"6666","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:05:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/pricing",        "default_branch": "main", "workflow_configured": true,  "worst_verdict": "CLEAN", "has_regression": false, "default_branch_verdict": {"verdict":"CLEAN","state":"success","sha":"7777","short_sha":"7777","description":"No memory regression on this deploy.","target_url":"","updated_at":"2026-07-02T05:06:00Z","worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/observability",  "default_branch": "main", "workflow_configured": false, "worst_verdict": "NONE",  "has_regression": false, "default_branch_verdict": {"verdict":"NONE","state":"none","sha":null,"short_sha":null,"description":null,"target_url":null,"updated_at":null,"worst_function":null,"worst_bytes":null}, "pr_verdicts": [] },
+    { "full_name": "example-corp/legacy-cron",    "default_branch": "main", "workflow_configured": false, "worst_verdict": "NONE",  "has_regression": false, "default_branch_verdict": {"verdict":"NONE","state":"none","sha":null,"short_sha":null,"description":null,"target_url":null,"updated_at":null,"worst_function":null,"worst_bytes":null}, "pr_verdicts": [] }
+  ]
+}

@@ -1,0 +1,139 @@
+# Fleet Memory Regression Dashboard
+#
+# Runs on cron, plus on any push to main and on manual dispatch. Enumerates the
+# configured scope (org or user), fetches the latest staging-memory-check
+# verdict for every repo (default branch + open PRs), and publishes a filtered
+# single-pane dashboard to GitHub Pages.
+#
+# Configure via repo variables (Settings → Secrets and variables → Actions →
+# Variables):
+#   DASHBOARD_SCOPE_KIND   "org" or "user"    (default: "user")
+#   DASHBOARD_SCOPE_NAME   org / user handle  (default: repo owner)
+#
+# Requires a repo secret FLEET_SCAN_TOKEN — a fine-grained PAT with repo:read
+# for all repos you want scanned. GITHUB_TOKEN is scoped to only this repo and
+# cannot see siblings.
+#
+# The dashboard is published to gh-pages at /index.html and /fleet-verdicts.json.
+
+name: fleet-dashboard
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"       # every 30 min
+  workflow_dispatch:
+    inputs:
+      scope_kind:
+        description: "Override scope kind (org|user)"
+        required: false
+        type: string
+      scope_name:
+        description: "Override scope name"
+        required: false
+        type: string
+      include_unknown:
+        description: "Surface UNKNOWN (evaluator errored) rows too"
+        required: false
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - "scripts/ci/collect-verdicts.sh"
+      - "scripts/ci/render-dashboard.py"
+      - ".github/workflows/fleet-dashboard.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: fleet-dashboard
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      regressing: ${{ steps.summary.outputs.regressing }}
+      total:      ${{ steps.summary.outputs.total }}
+    steps:
+      - name: Checkout tooling
+        uses: actions/checkout@v4
+
+      - name: Resolve scope
+        id: scope
+        env:
+          IN_KIND:  ${{ inputs.scope_kind }}
+          IN_NAME:  ${{ inputs.scope_name }}
+          VAR_KIND: ${{ vars.DASHBOARD_SCOPE_KIND }}
+          VAR_NAME: ${{ vars.DASHBOARD_SCOPE_NAME }}
+          OWNER:    ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          KIND="${IN_KIND:-${VAR_KIND:-user}}"
+          NAME="${IN_NAME:-${VAR_NAME:-$OWNER}}"
+          case "$KIND" in org|user) ;; *) echo "::error::scope_kind must be org|user"; exit 2;; esac
+          echo "kind=$KIND" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "Scope: $KIND/$NAME"
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends jq
+
+      - name: Collect fleet verdicts
+        env:
+          # Fall back to GITHUB_TOKEN if PAT missing (won't cover other repos)
+          GH_TOKEN: ${{ secrets.FLEET_SCAN_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p site
+          scripts/ci/collect-verdicts.sh \
+            --${{ steps.scope.outputs.kind }} "${{ steps.scope.outputs.name }}" \
+            --out-json site/fleet-verdicts.json
+
+      - name: Render dashboard
+        run: |
+          set -euo pipefail
+          FLAGS=""
+          if [[ "${{ inputs.include_unknown }}" == "true" ]]; then FLAGS="--include-unknown"; fi
+          python3 scripts/ci/render-dashboard.py \
+            --in site/fleet-verdicts.json \
+            --out-md   site/fleet-dashboard.md \
+            --out-html site/index.html \
+            $FLAGS || true    # non-zero exit means regressions exist; we still publish
+
+      - name: Emit summary
+        id: summary
+        run: |
+          set -euo pipefail
+          TOTAL=$(jq '.counts.total // 0'      site/fleet-verdicts.json)
+          REG=$(jq   '.counts.regressing // 0' site/fleet-verdicts.json)
+          echo "total=$TOTAL"     >> "$GITHUB_OUTPUT"
+          echo "regressing=$REG"  >> "$GITHUB_OUTPUT"
+          {
+            echo "## 🧠 Fleet Memory Regression Dashboard"
+            echo
+            echo "- Scope: \`${{ steps.scope.outputs.kind }}/${{ steps.scope.outputs.name }}\`"
+            echo "- Repos scanned: **$TOTAL**"
+            echo "- Regressing: **$REG**"
+            echo
+            cat site/fleet-dashboard.md
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

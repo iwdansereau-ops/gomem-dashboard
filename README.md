@@ -130,3 +130,65 @@ you already expose it elsewhere.
 gomem gcstats --base http://host:6060 [--out gcstats_now.json]
 gomem gcdiff  --dir  ./profiles       [--out gcdiff.json]
 ```
+
+## Fleet dashboard (single pane of glass)
+
+Once several services are on the reusable workflow, the fleet dashboard rolls
+up their latest verdicts and surfaces **only the repos that are currently
+regressing** — so you don't have to open individual PRs to know what's on
+fire.
+
+Two pieces:
+
+- `scripts/ci/collect-verdicts.sh` — enumerates every repo in an org/user,
+  pulls the latest `staging-memory-check/verdict` commit status for the tip
+  of the default branch and every open PR, classifies the verdict from the
+  status description (`RETENTION_LEAK` / `ALLOC_CHURN` / `MIXED` / `CLEAN` /
+  `UNKNOWN`), and writes `fleet-verdicts.json`.
+- `scripts/ci/render-dashboard.py` — renders that JSON to `fleet-dashboard.md`
+  and `fleet-dashboard.html`. **Clean repos are collapsed into totals**; only
+  regressing services get rows. The HTML view is a self-contained single-pane
+  page — drop it on GitHub Pages, a wiki, or any static host.
+
+### Local usage
+
+```bash
+scripts/ci/collect-verdicts.sh --org my-org --out-json fleet-verdicts.json
+python3 scripts/ci/render-dashboard.py \
+    --in fleet-verdicts.json \
+    --out-md   fleet-dashboard.md \
+    --out-html fleet-dashboard.html
+```
+
+Exit code from `render-dashboard.py` is `1` iff at least one service is
+regressing — handy for wiring into alerting.
+
+### Continuous refresh via `.github/workflows/fleet-dashboard.yml`
+
+The scheduled workflow re-runs the collector every 30 minutes, on every push
+to `main`, and on manual dispatch, then publishes to GitHub Pages.
+
+Configure the scope with repo **Variables** (Settings → Secrets and variables
+→ Actions → Variables):
+
+| Variable | Values | Purpose |
+|---|---|---|
+| `DASHBOARD_SCOPE_KIND` | `org` or `user` | which enumeration endpoint to use |
+| `DASHBOARD_SCOPE_NAME` | e.g. `my-org` | who to scan (defaults to repo owner) |
+
+Add a repo **Secret** `FLEET_SCAN_TOKEN` — a fine-grained PAT with
+`Metadata: read`, `Contents: read`, `Pull requests: read`, `Commit statuses:
+read` on every repo you want scanned. `GITHUB_TOKEN` alone can't see sibling
+repos.
+
+Enable GitHub Pages once (Settings → Pages → Source: GitHub Actions). After
+the first successful run, the dashboard lives at:
+
+```
+https://<owner>.github.io/gomem-dashboard/
+```
+
+### Sample output
+
+See `examples/sample-fleet-verdicts.json` for a realistic multi-repo dataset,
+and run the renderer against it to preview what a "hot" fleet looks like.
