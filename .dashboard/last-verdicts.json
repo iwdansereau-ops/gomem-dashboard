@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T06:46:58Z",
+  "generated_at": "2026-07-02T07:59:11Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "33d1b2cc1a2dc1ed208ff36cb73294443bd82d17",
-        "short_sha": "33d1b2c",
+        "sha": "7abf5006038e48bf417e25be356251e897cefae4",
+        "short_sha": "7abf500",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -57,6 +57,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "2ab6f3340e42f3f91d60dab5bd64cf266aff6f7a",
+          "short_sha": "2ab6f33",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 3,
+          "pr_title": "Add pipeline_order check to otel-auditor (ORDER001-ORDER007)",
+          "pr_url": "https://github.com/iwdansereau-ops/otel-collector-config/pull/3"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -110,14 +124,34 @@
       "has_regression": false,
       "workflow_configured": false,
       "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/otelharness",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "a08f0f80342ac0a4511744f18a316248df742392",
+        "short_sha": "a08f0f8",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
     }
   ],
   "counts": {
-    "total": 4,
+    "total": 5,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 4
+    "no_data": 5
   }
 }
