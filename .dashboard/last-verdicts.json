@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-07-02T06:02:17Z",
+  "scope": "user/iwdansereau-ops",
+  "repos": [
+    {
+      "full_name": "iwdansereau-ops/gomem-dashboard",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "88ab3a21d6a83359e5888d8bc6602eb96034bd9a",
+        "short_sha": "88ab3a2",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": true,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/interner-metrics",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "10d200bbc8a93f8b76eac127eab6fd49f71029d7",
+        "short_sha": "10d200b",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/otel-collector-config",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "53fe6f9b5aaf22d9ba3e712e6dec19bec4e63abb",
+        "short_sha": "53fe6f9",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "6df71f99edb7730f93eab2040a3b8e5af38049d1",
+          "short_sha": "6df71f9",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "Add user-agent normalization + route cardinality control",
+          "pr_url": "https://github.com/iwdansereau-ops/otel-collector-config/pull/1"
+        }
+      ],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    }
+  ],
+  "counts": {
+    "total": 3,
+    "with_workflow": 1,
+    "regressing": 0,
+    "clean": 0,
+    "unknown": 0,
+    "no_data": 3
+  }
+}
