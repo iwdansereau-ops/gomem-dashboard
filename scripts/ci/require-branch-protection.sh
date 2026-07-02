@@ -76,13 +76,18 @@ if ! command -v gh   >/dev/null 2>&1; then echo "gh CLI not found on PATH"   >&2
 if ! command -v jq   >/dev/null 2>&1; then echo "jq not found on PATH"        >&2; exit 3; fi
 
 api_get() {
+  # gh api writes the error body to stdout on non-2xx, so we suppress *both*
+  # streams here and let the caller decide what to do when the call fails.
   gh api -H "Accept: application/vnd.github+json" "$1" 2>/dev/null
 }
 
 # ---------------------------------------------------------------------------
 # Fetch current protection (empty JSON if the branch has none).
 # ---------------------------------------------------------------------------
-CURRENT="$(api_get "/repos/${REPO}/branches/${BRANCH}/protection" || echo '{}')"
+if ! CURRENT="$(api_get "/repos/${REPO}/branches/${BRANCH}/protection")"; then
+  CURRENT='{}'
+fi
+[[ -z "$CURRENT" ]] && CURRENT='{}'
 
 # Existing required contexts, deduplicated.
 mapfile -t CURRENT_CONTEXTS < <(
@@ -119,8 +124,15 @@ CONTEXTS_JSON="$(printf '%s\n' "${DESIRED[@]:-}" | jq -R . | jq -sc .)"
 # ---------------------------------------------------------------------------
 # Read-through of everything else so we don't clobber unrelated settings.
 # ---------------------------------------------------------------------------
+# Defensive: if $CURRENT is empty/non-JSON (fresh branch, 404 from API), treat
+# it as `{}` so every field below falls through to its default.
+if ! echo "$CURRENT" | jq empty >/dev/null 2>&1; then
+  CURRENT='{}'
+fi
+
 CURRENT_STRICT="$(echo "$CURRENT"  | jq -r '.required_status_checks.strict // false')"
 CURRENT_REVIEWS="$(echo "$CURRENT" | jq -c '.required_pull_request_reviews // null')"
+[[ -z "$CURRENT_REVIEWS" ]] && CURRENT_REVIEWS="null"
 CURRENT_LINEAR="$(echo "$CURRENT"  | jq -r '.required_linear_history.enabled // false')"
 CURRENT_FORCE="$(echo "$CURRENT"   | jq -r '.allow_force_pushes.enabled // false')"
 CURRENT_DELETE="$(echo "$CURRENT"  | jq -r '.allow_deletions.enabled // false')"
