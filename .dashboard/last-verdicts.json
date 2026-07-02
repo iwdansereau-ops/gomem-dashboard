@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T07:59:11Z",
+  "generated_at": "2026-07-02T09:23:34Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,15 +8,30 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7abf5006038e48bf417e25be356251e897cefae4",
-        "short_sha": "7abf500",
+        "sha": "0f2d2646a507abcfeea28e2519d7e6f06d006c8c",
+        "short_sha": "0f2d264",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "5ae12a480c41517ae1878e40116fe50672420dc8",
+          "short_sha": "5ae12a4",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 2,
+          "pr_title": "ci(fleet-dashboard): replace FLEET_SCAN_TOKEN PAT with GitHub App OIDC token",
+          "pr_url": "https://github.com/iwdansereau-ops/gomem-dashboard/pull/2"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": true,
