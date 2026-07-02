@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T06:02:17Z",
+  "generated_at": "2026-07-02T06:46:58Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "88ab3a21d6a83359e5888d8bc6602eb96034bd9a",
-        "short_sha": "88ab3a2",
+        "sha": "33d1b2cc1a2dc1ed208ff36cb73294443bd82d17",
+        "short_sha": "33d1b2c",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -60,6 +60,20 @@
         {
           "verdict": "NONE",
           "state": "none",
+          "sha": "d4b4746ca0497cf9dbae6c60733131080cba93af",
+          "short_sha": "d4b4746",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 2,
+          "pr_title": "Add memory_limiter + batch, enable exporter backpressure, remove logging from prod",
+          "pr_url": "https://github.com/iwdansereau-ops/otel-collector-config/pull/2"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
           "sha": "6df71f99edb7730f93eab2040a3b8e5af38049d1",
           "short_sha": "6df71f9",
           "description": null,
@@ -76,14 +90,34 @@
       "has_regression": false,
       "workflow_configured": false,
       "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/otel-collector-tuner",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "695d247355c25291ebd3935fea37ba79af816458",
+        "short_sha": "695d247",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
     }
   ],
   "counts": {
-    "total": 3,
+    "total": 4,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 3
+    "no_data": 4
   }
 }
