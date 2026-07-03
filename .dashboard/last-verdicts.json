@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T11:07:32Z",
+  "generated_at": "2026-07-03T00:55:00Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "59215d20147e864cc5d04e9a496e8afea47f6d0d",
-        "short_sha": "59215d2",
+        "sha": "4d4e2649ac3d8dbad6ef9575e4e5ff258cc12dc0",
+        "short_sha": "4d4e264",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -159,14 +159,34 @@
       "has_regression": false,
       "workflow_configured": false,
       "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/perf-infra",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "3d6d181af4fddd61e701e99009ee48fdd2b69e97",
+        "short_sha": "3d6d181",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
     }
   ],
   "counts": {
-    "total": 5,
+    "total": 6,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 5
+    "no_data": 6
   }
 }
