@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-04T12:51:23Z",
+  "generated_at": "2026-07-04T13:55:37Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3e5de1da8f3f32d9b731897988b7f0803a666613",
-        "short_sha": "3e5de1d",
+        "sha": "b5de009c29515998bcbe16ae35e7b585dadf2f10",
+        "short_sha": "b5de009",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -91,7 +91,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "c91e39a2490ebef9191a5fab2bc83d3f0de6293f",
+          "short_sha": "c91e39a",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "Add Odisena Netlify CI/CD pipeline (setup, not yet active)",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/1"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
