@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T18:50:27Z",
+  "generated_at": "2026-07-04T04:58:12Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "bde0a89bda65efcad9cedfe2a76a169d292a059b",
-        "short_sha": "bde0a89",
+        "sha": "08a3bfa37834edcecd8242e790cff40653ab6afb",
+        "short_sha": "08a3bfa",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -45,6 +45,46 @@
         "state": "none",
         "sha": "10d200bbc8a93f8b76eac127eab6fd49f71029d7",
         "short_sha": "10d200b",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/obsidian-vault",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "527a444f1d2b8f87702d8ad6689cfac2269a2f4c",
+        "short_sha": "527a444",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/opentelemetry-collector-contrib",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "87f90e10c42cb4925a1a5b500a5f4acd2f494bcc",
+        "short_sha": "87f90e1",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -179,14 +219,34 @@
       "has_regression": false,
       "workflow_configured": false,
       "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/terraform-qs-refresh",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "641e39eb5314fe371bcea7e7b1dd701685d787a5",
+        "short_sha": "641e39e",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
     }
   ],
   "counts": {
-    "total": 6,
+    "total": 9,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 6
+    "no_data": 9
   }
 }
