@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T14:52:17Z",
+  "generated_at": "2026-07-05T15:52:29Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "6ddaa4d05bfc18ac542514ab6924cc81f29d61a4",
-        "short_sha": "6ddaa4d",
+        "sha": "f92e9d670ca3b100fda6f930f02aee799d556488",
+        "short_sha": "f92e9d6",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -83,8 +83,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "6d5506236ee0ef8e7f6fdb051701997d6e30f6b8",
-        "short_sha": "6d55062",
+        "sha": "cafb36743e7fc17f44ee85deb79dad10113772e7",
+        "short_sha": "cafb367",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -256,6 +256,26 @@
       "notes": null
     },
     {
+      "full_name": "iwdansereau-ops/skyrim-crashlogs",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "801f060f2b62bbc534dce640a4fb1143e7a59c5d",
+        "short_sha": "801f060",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
       "full_name": "iwdansereau-ops/terraform-qs-refresh",
       "default_branch": "main",
       "default_branch_verdict": {
@@ -277,11 +297,11 @@
     }
   ],
   "counts": {
-    "total": 10,
+    "total": 11,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 10
+    "no_data": 11
   }
 }
