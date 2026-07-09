@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T04:47:10Z",
+  "generated_at": "2026-07-09T05:45:07Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "99c536bcefc1a4f8917cbce80576892e229d0042",
-        "short_sha": "99c536b",
+        "sha": "4f2acf184006588fefa2c7e48127b670c048d3bc",
+        "short_sha": "4f2acf1",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -123,8 +123,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "79fd9e5ef50b15ff053b18673191c5cc08ad5688",
-        "short_sha": "79fd9e5",
+        "sha": "8a32651c7cddea0b9418a79dcd6de8aff874c635",
+        "short_sha": "8a32651",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -135,16 +135,16 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "9a8f7fb2f7e46801b06c420e592b912e5964a0fc",
-          "short_sha": "9a8f7fb",
+          "sha": "399424b9d42ce242149b87425d8389d41339d2fc",
+          "short_sha": "399424b",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
-          "pr_number": 4,
-          "pr_title": "Enhance v7.html with cross-thread mirrors (LLM registry, Visual Bible, OpenAI gates)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/4"
+          "pr_number": 5,
+          "pr_title": "Add renderOidcDrift panel (PR #5) — fourth cross-thread mirror",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/5"
         },
         {
           "verdict": "NONE",
@@ -172,8 +172,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "9bfe139b3f198566aaa026686fb6a08831186cb5",
-        "short_sha": "9bfe139",
+        "sha": "857f7f999be2e507779cb300a7fce37365fe6df8",
+        "short_sha": "857f7f9",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -363,7 +363,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "26c7dc2700eb4d054dc9fd76859760d42b6ed59b",
+          "short_sha": "26c7dc2",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "Add security/oidc-baseline.yaml for OIDC Sentinel (task 4d38c8a5)",
+          "pr_url": "https://github.com/iwdansereau-ops/terraform-qs-refresh/pull/1"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
