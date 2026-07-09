@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T19:42:38Z",
+  "generated_at": "2026-07-09T20:45:10Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "43fea0facac6b9301697ce4d07f6ebe852873328",
-        "short_sha": "43fea0f",
+        "sha": "ccbfc3162d92f14eca2eac10f4a4a703763b05b9",
+        "short_sha": "ccbfc31",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -132,6 +132,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "79be38dc87a3e2decff38dc8b3259cddb97aa0d0",
+          "short_sha": "79be38d",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 10,
+          "pr_title": "v9 canonicalization mirror: Layer-1 lineage panel + execution-track panel",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/10"
+        },
         {
           "verdict": "NONE",
           "state": "none",
