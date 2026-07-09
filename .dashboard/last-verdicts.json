@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T06:47:18Z",
+  "generated_at": "2026-07-09T07:40:32Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "0d316b77eb9860b26bab444210a9214177743e41",
-        "short_sha": "0d316b7",
+        "sha": "445000adc0a9c364c27276658716df6b15e31c44",
+        "short_sha": "445000a",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -123,8 +123,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "1f09a009f2c62ad88d93136ea5b282ed94cbd735",
-        "short_sha": "1f09a00",
+        "sha": "c31245a8ab25b73c8adb39a8d071a18c570d0bb4",
+        "short_sha": "c31245a",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -132,20 +132,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "9e2ad41b2ea6a88df062238c47cf6ef08789c3eb",
-          "short_sha": "9e2ad41",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 9,
-          "pr_title": "Enhance mirrors with cross-thread updates: v8-am-037..041 chain, Space registry v1.4, Visual Bible rev 1.3",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/9"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -172,8 +158,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "857f7f999be2e507779cb300a7fce37365fe6df8",
-        "short_sha": "857f7f9",
+        "sha": "ea708af549a4ef925daaefc41c76dff767cc777f",
+        "short_sha": "ea708af",
         "description": null,
         "target_url": null,
         "updated_at": null,
