@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T02:44:37Z",
+  "generated_at": "2026-07-09T03:53:09Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "f0ee32de8f35372a92d2d85289530d48cfa0a401",
-        "short_sha": "f0ee32d",
+        "sha": "b344c570e1879b9ad08d996266d89cbd2899059e",
+        "short_sha": "b344c57",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -78,6 +78,41 @@
       "notes": null
     },
     {
+      "full_name": "iwdansereau-ops/odisena-ai-gateway",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "1b23acc6a85d8c544bd283ddb9b988508ad6c25c",
+        "short_sha": "1b23acc",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "a27199da72d9a709fbbb6eb734dbcf24c9a33857",
+          "short_sha": "a27199d",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "chore(main): release 0.2.0",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/1"
+        }
+      ],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
       "full_name": "iwdansereau-ops/odisena-console",
       "default_branch": "main",
       "default_branch_verdict": {
@@ -92,6 +127,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "9a8f7fb2f7e46801b06c420e592b912e5964a0fc",
+          "short_sha": "9a8f7fb",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 4,
+          "pr_title": "Enhance v7.html with cross-thread mirrors (LLM registry, Visual Bible, OpenAI gates)",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/4"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -118,8 +167,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ff0d5179e7ed90ca2b90456ddf0a4faa7d04b8d8",
-        "short_sha": "ff0d517",
+        "sha": "636fbc5e6acded0af53edf58399c027b28b1d885",
+        "short_sha": "636fbc5",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -317,11 +366,11 @@
     }
   ],
   "counts": {
-    "total": 12,
+    "total": 13,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 12
+    "no_data": 13
   }
 }
