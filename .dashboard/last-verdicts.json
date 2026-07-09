@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T03:53:09Z",
+  "generated_at": "2026-07-09T04:47:10Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "b344c570e1879b9ad08d996266d89cbd2899059e",
-        "short_sha": "b344c57",
+        "sha": "99c536bcefc1a4f8917cbce80576892e229d0042",
+        "short_sha": "99c536b",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -83,30 +83,35 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "1b23acc6a85d8c544bd283ddb9b988508ad6c25c",
-        "short_sha": "1b23acc",
+        "sha": "482b6b8058482027df7a866c0a0e794f8051df21",
+        "short_sha": "482b6b8",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "a27199da72d9a709fbbb6eb734dbcf24c9a33857",
-          "short_sha": "a27199d",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "chore(main): release 0.2.0",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/odisena-ai-gateway-contract",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "32cac286ee697dba4e7e14672ca657a33e986c24",
+        "short_sha": "32cac28",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -167,8 +172,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "636fbc5e6acded0af53edf58399c027b28b1d885",
-        "short_sha": "636fbc5",
+        "sha": "9bfe139b3f198566aaa026686fb6a08831186cb5",
+        "short_sha": "9bfe139",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -366,11 +371,11 @@
     }
   ],
   "counts": {
-    "total": 13,
+    "total": 14,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 13
+    "no_data": 14
   }
 }
