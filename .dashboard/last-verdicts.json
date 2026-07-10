@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T18:45:46Z",
+  "generated_at": "2026-07-10T19:41:45Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -43,8 +43,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "64642f7ca1d6bbe9ba170e7cb4563d953b171e08",
-        "short_sha": "64642f7",
+        "sha": "5bab9ce3b1f6dcd23728550bca98cfedfd2c2540",
+        "short_sha": "5bab9ce",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -157,6 +157,26 @@
       "notes": null
     },
     {
+      "full_name": "iwdansereau-ops/life-dashboard",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "{\"message\":\"Branch not found\",\"documentation_url\":\"https://docs.github.com/rest/branches/branches#get-a-branch\",\"status\":\"404\"}",
+        "short_sha": "{\"messa",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
       "full_name": "iwdansereau-ops/obsidian-vault",
       "default_branch": "main",
       "default_branch_verdict": {
@@ -252,8 +272,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "cfa19360d3ce76c0d1ac5f04fa0aee34b30c6cd9",
-        "short_sha": "cfa1936",
+        "sha": "7d7ceab33fdf84651dd638e378c60614fdbd90bc",
+        "short_sha": "7d7ceab",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -385,8 +405,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "9aacd0f1e68f3649b5f266fdb3e116e0db46f951",
-        "short_sha": "9aacd0f",
+        "sha": "9413e0f9c18d0c93d71c173f11543ed0e39694fc",
+        "short_sha": "9413e0f",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -672,11 +692,11 @@
     }
   ],
   "counts": {
-    "total": 18,
+    "total": 19,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 18
+    "no_data": 19
   }
 }
