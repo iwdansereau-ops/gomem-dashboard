@@ -5,3 +5,5 @@ reports/
 reports_*/
 *.log
 .DS_Store
+avpt-snapshot/
+__pycache__/

@@ -1,0 +1,88 @@
+# .github/workflows/avpt-shared-rollout.yml
+#
+# Rollout of the shared, self-contained AVPT workflow (Assess → Validate →
+# Preserve → Transition) onto gomem-dashboard.
+#
+# This is a *caller*. All orchestration lives in the shared reusable workflow,
+# pinned by commit SHA so a platform-side change can never land in our CI
+# silently:
+#
+#     iwdansereau-ops/avpt-cicd-dashboard/.github/workflows/avpt.yml@<SHA>
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase mapping for this repo (see .github/workflows/README.md → "AVPT rollout")
+#   Assess    – platform-provided environment/context probe (no repo hook).
+#   Validate  – REAL Go build/vet/test + memory-regression evaluator dry-run,
+#               via scripts/ci/avpt-validate.sh (same tooling as the blocking
+#               staging-memory-check/verdict gate; no live staging, no secrets).
+#   Preserve  – safe, read-only benchmark + config metadata snapshot, via
+#               scripts/ci/avpt-preserve.sh (uploaded as the AVPT artifact).
+#   Transition (deploy/rollback) – INERT. dry_run=true and both deploy and
+#               rollback are disabled + no-op, so nothing is ever mutated.
+#
+# Safety envelope for the rollout:
+#   * dry_run: true                 → plan-only, no real deploy/rollback
+#   * enable_deploy / enable_rollback: false, no-op commands
+#   * secrets: none passed          → cannot reach any live environment
+#   * Existing branch protection (staging-memory-check/verdict and any extras)
+#     is untouched — this workflow adds no required check and removes none.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: avpt-shared-rollout
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Plan-only. Keep true during rollout; deploy/rollback stay inert."
+        type: boolean
+        required: false
+        default: true
+  # Self-test the caller on the rollout branch and on PRs that touch it, so the
+  # integration is exercised before it is ever promoted to main.
+  pull_request:
+    paths:
+      - ".github/workflows/avpt-shared-rollout.yml"
+      - "scripts/ci/avpt-validate.sh"
+      - "scripts/ci/avpt-preserve.sh"
+
+concurrency:
+  group: avpt-shared-rollout-${{ github.ref }}
+  cancel-in-progress: true
+
+# No org/repo secrets are forwarded to the shared workflow — the rollout runs
+# entirely offline. Least-privilege token scopes only.
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  avpt:
+    # PINNED BY SHA. Do not change to a mutable ref. See README "AVPT rollout →
+    # Upgrading the pin" for the review checklist before bumping this.
+    uses: iwdansereau-ops/avpt-cicd-dashboard/.github/workflows/avpt.yml@4e033c739fe50c9cd470132c8005e23297877b19
+    with:
+      # ---- global safety ------------------------------------------------
+      dry_run: ${{ inputs.dry_run != false }}
+      environment: staging
+
+      # ---- let the shared workflow see our repo so it can run our scripts
+      checkout_caller: true
+
+      # ---- Assess -------------------------------------------------------
+      # Platform default probe; nothing repo-specific to hook in here.
+      assess_command: 'echo "[avpt] assess: gomem-dashboard rollout, dry_run=${{ inputs.dry_run != false }}"'
+
+      # ---- Validate → real Go / staging memory checks -------------------
+      validate_command: "scripts/ci/avpt-validate.sh"
+
+      # ---- Preserve → benchmark / config metadata snapshot --------------
+      preserve_command: "scripts/ci/avpt-preserve.sh ./avpt-snapshot"
+      preserve_artifact_path: "avpt-snapshot/**"
+
+      # ---- Transition (deploy / rollback) → INERT -----------------------
+      enable_deploy: false
+      enable_rollback: false
+      deploy_command: 'echo "[avpt] deploy is inert during rollout (dry_run)"'
+      rollback_command: 'echo "[avpt] rollback is inert during rollout (dry_run)"'
+    # secrets: intentionally omitted — the rollout must not reach live infra.

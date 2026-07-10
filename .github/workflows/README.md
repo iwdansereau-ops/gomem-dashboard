@@ -312,3 +312,74 @@ rebase-and-merge flows. Branch protection evaluates checks on the PR's
 never gate the merge. The workflow resolves the PR from the deployed SHA
 via `/repos/{owner}/{repo}/commits/{sha}/pulls` and publishes the status
 back to that PR's `head.sha`, closing the loop.
+
+## AVPT rollout
+
+`.github/workflows/avpt-shared-rollout.yml` integrates this repo with the
+shared, self-contained **AVPT** workflow (Assess → Validate → Preserve →
+Transition) hosted by the platform repo
+`iwdansereau-ops/avpt-cicd-dashboard`. The caller is intentionally thin: it
+`uses:` the shared reusable workflow **pinned by commit SHA** and maps the two
+repo-specific phases onto real tooling already in this repo.
+
+```
+uses: iwdansereau-ops/avpt-cicd-dashboard/.github/workflows/avpt.yml@4e033c739fe50c9cd470132c8005e23297877b19
+```
+
+### Phase mapping
+
+| AVPT phase | gomem-dashboard mapping |
+| --- | --- |
+| **Assess** | Platform-provided context probe. No repo hook. |
+| **Validate** | `scripts/ci/avpt-validate.sh` — real Go `build` / `vet` / `test` plus a **dry-run** of the memory-regression evaluator (the same classifier behind the blocking `staging-memory-check/verdict` gate). No live staging endpoint, no secrets. |
+| **Preserve** | `scripts/ci/avpt-preserve.sh` — a safe, read-only snapshot of benchmark + config metadata (`go.mod`/`go.sum`, `go env`, workflow inventory, benchmark baseline, git SHA). Uploaded as the AVPT artifact. Mutates nothing. |
+| **Transition** (deploy / rollback) | **Inert.** `dry_run: true`, `enable_deploy: false`, `enable_rollback: false`, and no-op commands. Nothing is ever deployed or rolled back during the rollout. |
+
+### Safety envelope
+
+The rollout runs entirely offline and cannot touch live infrastructure:
+
+- `dry_run: true` — plan-only.
+- No `secrets:` block — the shared workflow receives zero credentials, so it
+  cannot reach any staging/production environment.
+- Deploy **and** rollback are disabled and no-op.
+- **Branch protection is untouched.** This workflow neither adds nor removes a
+  required status check. The existing `staging-memory-check/verdict` gate (and
+  any extras configured via `scripts/ci/require-branch-protection.sh`) keeps
+  working exactly as before. Promoting AVPT to a *required* check is a
+  deliberate, separate follow-up — see below.
+
+### Upgrading the pin
+
+The `@<SHA>` on the `uses:` line is the single source of truth for which
+version of the shared AVPT workflow runs. Never point it at a mutable ref
+(`@main`, `@v1`) — a SHA is the only pin that can't shift under you.
+
+To bump it:
+
+1. Read the diff on `iwdansereau-ops/avpt-cicd-dashboard` between the current
+   pinned SHA and the target SHA, paying attention to the `workflow_call`
+   input contract this caller depends on: `dry_run`, `environment`,
+   `checkout_caller`, `assess_command`, `validate_command`,
+   `preserve_command`, `preserve_artifact_path`, `enable_deploy`,
+   `enable_rollback`, `deploy_command`, `rollback_command`. If any were
+   renamed or removed, update this caller in the same PR.
+2. Update the SHA in **both** the `uses:` line and the "Upgrading the pin"
+   reference above so docs and code never drift.
+3. Keep `dry_run: true` and the inert deploy/rollback until the rollout is
+   explicitly signed off — a pin bump is not a promotion to live deploy.
+4. Let the `pull_request` self-test on this caller run green before merging.
+
+### Promoting Validate to a required check (later)
+
+When the team is ready to make AVPT blocking, append its status context to
+branch protection with the existing helper — this is additive and preserves
+`staging-memory-check/verdict`:
+
+```bash
+./scripts/ci/require-branch-protection.sh \
+    --repo iwdansereau-ops/gomem-dashboard \
+    --extra-check "avpt/validate"
+```
+
+Until then, AVPT runs in report-only mode alongside the memory-check gate.
