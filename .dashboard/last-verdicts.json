@@ -1,15 +1,50 @@
 {
-  "generated_at": "2026-07-10T07:41:29Z",
+  "generated_at": "2026-07-10T08:40:44Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
+    {
+      "full_name": "iwdansereau-ops/avpt-cicd-dashboard",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "4de2b4313d55cb2029aee1065bb33a58dcb41246",
+        "short_sha": "4de2b43",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "0ec0792fe86f7970de7a9d2b8fc69e85cce6dc36",
+          "short_sha": "0ec0792",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 5,
+          "pr_title": "feat: add AVPT Terraform drift detection",
+          "pr_url": "https://github.com/iwdansereau-ops/avpt-cicd-dashboard/pull/5"
+        }
+      ],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
     {
       "full_name": "iwdansereau-ops/gomem-dashboard",
       "default_branch": "main",
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "21ca98dee1b0b1f7aeb8ff27b1e3b4eddc91f3df",
-        "short_sha": "21ca98d",
+        "sha": "85f3bcaab68560a90a8b257de82a8f21051f59cc",
+        "short_sha": "85f3bca",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -35,6 +70,26 @@
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": true,
+      "notes": null
+    },
+    {
+      "full_name": "iwdansereau-ops/infinity-engine-resilience",
+      "default_branch": "master",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "8aaac1a25e0037f9c5de04b5672b621f323e8d30",
+        "short_sha": "8aaac1a",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
       "notes": null
     },
     {
@@ -123,8 +178,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7af1b4f0f92261edfc00d6a366d1f23e37c26af4",
-        "short_sha": "7af1b4f",
+        "sha": "7257fa3aaf86bd45fbbbb118a2e5971efb00b4ed",
+        "short_sha": "7257fa3",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -143,8 +198,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e2bb76f4834d2a1635f6c17dc27fe2feedfd1149",
-        "short_sha": "e2bb76f",
+        "sha": "a1e197663656b361d9576658626fbb1a25c9cf41",
+        "short_sha": "a1e1976",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -152,6 +207,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "8cb2389eb287774df9e4d4eea62f6cc669630a69",
+          "short_sha": "8cb2389",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 13,
+          "pr_title": "Fix ruleset manifest compatibility with GitHub API",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/13"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -187,13 +256,33 @@
       "notes": null
     },
     {
+      "full_name": "iwdansereau-ops/odisena-master",
+      "default_branch": "main",
+      "default_branch_verdict": {
+        "verdict": "NONE",
+        "state": "none",
+        "sha": "d9b4310e4a55791ada241e388b404cc04e2aa79c",
+        "short_sha": "d9b4310",
+        "description": null,
+        "target_url": null,
+        "updated_at": null,
+        "worst_function": null,
+        "worst_bytes": null
+      },
+      "pr_verdicts": [],
+      "worst_verdict": "NONE",
+      "has_regression": false,
+      "workflow_configured": false,
+      "notes": null
+    },
+    {
       "full_name": "iwdansereau-ops/odisena-timeline",
       "default_branch": "main",
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a20ab16ce1e10a40daecb2cb8ea22ea5331627a5",
-        "short_sha": "a20ab16",
+        "sha": "fe74e4234886f0e9aab0437f244231a203949e91",
+        "short_sha": "fe74e42",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -343,7 +432,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "69f6f832d9b60072e6d800bd83a07b6c991034e3",
+          "short_sha": "69f6f83",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "Add AVPT platform pilot integration",
+          "pr_url": "https://github.com/iwdansereau-ops/perf-infra/pull/1"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -391,11 +495,11 @@
     }
   ],
   "counts": {
-    "total": 15,
+    "total": 18,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 15
+    "no_data": 18
   }
 }
