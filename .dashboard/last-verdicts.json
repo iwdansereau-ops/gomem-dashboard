@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T19:41:45Z",
+  "generated_at": "2026-07-10T20:53:19Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -43,8 +43,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "5bab9ce3b1f6dcd23728550bca98cfedfd2c2540",
-        "short_sha": "5bab9ce",
+        "sha": "32a6557e8aa5551edfe2127d57056a23d59192e9",
+        "short_sha": "32a6557",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -52,20 +52,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "033bf0650735317b41d814c76880c890de8e722a",
-          "short_sha": "033bf06",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 3,
-          "pr_title": "ci(avpt): integrate shared self-contained AVPT workflow (dry-run rollout)",
-          "pr_url": "https://github.com/iwdansereau-ops/gomem-dashboard/pull/3"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -92,30 +78,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "8aaac1a25e0037f9c5de04b5672b621f323e8d30",
-        "short_sha": "8aaac1a",
+        "sha": "fdc86ee65e56ad1754bb00e19a510a1d69252b58",
+        "short_sha": "fdc86ee",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "f6836bbba0b5b862d4703f3849bc63665844e23d",
-          "short_sha": "f6836bb",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "Integrate shared AVPT reusable workflow (dry-run rollout)",
-          "pr_url": "https://github.com/iwdansereau-ops/infinity-engine-resilience/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -127,30 +98,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "10d200bbc8a93f8b76eac127eab6fd49f71029d7",
-        "short_sha": "10d200b",
+        "sha": "f06842b90ec1455aa35695e65aa7ca4f67c2b080",
+        "short_sha": "f06842b",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "072476599dbc15029b495524b8da1ca6653d661b",
-          "short_sha": "0724765",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "ci: integrate shared AVPT workflow pinned by SHA",
-          "pr_url": "https://github.com/iwdansereau-ops/interner-metrics/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -162,8 +118,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "{\"message\":\"Branch not found\",\"documentation_url\":\"https://docs.github.com/rest/branches/branches#get-a-branch\",\"status\":\"404\"}",
-        "short_sha": "{\"messa",
+        "sha": "4e16376fef97a5cff620983d3e0891e7b44b0013",
+        "short_sha": "4e16376",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -202,8 +158,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "482b6b8058482027df7a866c0a0e794f8051df21",
-        "short_sha": "482b6b8",
+        "sha": "e30fcfc04f6c72463ac3c8ac6209904a1eb29d4b",
+        "short_sha": "e30fcfc",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -214,16 +170,100 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "252fcbd76bfe6399924dc9c56853401690186662",
-          "short_sha": "252fcbd",
+          "sha": "90487ed09f6d694108f8064b41080b1b8bf9a0ca",
+          "short_sha": "90487ed",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
-          "pr_number": 2,
-          "pr_title": "ci: integrate shared AVPT reusable workflow (SHA-pinned caller, dry-run)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/2"
+          "pr_number": 9,
+          "pr_title": "chore(main): release 0.2.1",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/9"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "2044e60a230c9eb94ce81165a212d980e03027ba",
+          "short_sha": "2044e60",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 8,
+          "pr_title": "chore: bump @types/node from 20.19.43 to 26.1.1",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/8"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "db4660c7bfd078d4454aa031d8565ebb33fba261",
+          "short_sha": "db4660c",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 7,
+          "pr_title": "chore: bump typescript from 5.9.3 to 7.0.2",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/7"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "7e4b9836a36e65ec145080ef1c2725eb03d4b392",
+          "short_sha": "7e4b983",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 6,
+          "pr_title": "ci: bump actions/upload-artifact from 4 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/6"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "4b992013df84d47130e3fd2a1e66f3047a157936",
+          "short_sha": "4b99201",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 5,
+          "pr_title": "ci: bump actions/checkout from 4 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/5"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "4b962969f4d320102a366d02f5b84776df0cfd28",
+          "short_sha": "4b96296",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 4,
+          "pr_title": "ci: bump googleapis/release-please-action from 4 to 5",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/4"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "47aebfaec9266dcc38f9cef667f07e662b1eb083",
+          "short_sha": "47aebfa",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 3,
+          "pr_title": "ci: bump actions/setup-node from 4 to 6",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/3"
         }
       ],
       "worst_verdict": "NONE",
@@ -237,30 +277,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "32cac286ee697dba4e7e14672ca657a33e986c24",
-        "short_sha": "32cac28",
+        "sha": "426b4d3fc7b7bb01b72afdc07bae1c7612d4407a",
+        "short_sha": "426b4d3",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "b99056bf84ec80ac5ae9caf29d0b22a33e9c141f",
-          "short_sha": "b99056b",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "ci(avpt): adopt SHA-pinned shared AVPT workflow (inert dry-run)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -272,30 +297,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7d7ceab33fdf84651dd638e378c60614fdbd90bc",
-        "short_sha": "7d7ceab",
+        "sha": "a89c78068453989ab1d6510501a702d277c4dfd5",
+        "short_sha": "a89c780",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "bfecfa1bed182805dfc35fa346156d5ef5cc6c6d",
-          "short_sha": "bfecfa1",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "ci: integrate AVPT reusable workflow (non-destructive)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-chronicle/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -307,8 +317,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7831707d55f1bb09c06c5d5a2ec2ba99afa827da",
-        "short_sha": "7831707",
+        "sha": "0c1dac8c129a89c500ac5f114a96a3c30b318e30",
+        "short_sha": "0c1dac8",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -316,20 +326,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "5cadf3f8da9a67f14636f034f244ea67e7c33440",
-          "short_sha": "5cadf3f",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 14,
-          "pr_title": "Wire AVPT shared reusable workflow (dry-run, inert)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/14"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -370,30 +366,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "d9b4310e4a55791ada241e388b404cc04e2aa79c",
-        "short_sha": "d9b4310",
+        "sha": "28fd57b7a0fabbcdcfa0015436535444ec3e966b",
+        "short_sha": "28fd57b",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "b6e990b7360cd2ed424c1b7dd35ade2b4041af31",
-          "short_sha": "b6e990b",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 3,
-          "pr_title": "feat(avpt): inert dry-run observability companion for shared reusable workflow",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-master/pull/3"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -405,44 +386,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "9413e0f9c18d0c93d71c173f11543ed0e39694fc",
-        "short_sha": "9413e0f",
+        "sha": "3dcc3557e5a70911e4b8b0f63f3c690fdf33799b",
+        "short_sha": "3dcc355",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "fe9d4fd5f164dfd29b79b885920bff04dc69ff15",
-          "short_sha": "fe9d4fd",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 7,
-          "pr_title": "Add inert AWS provider-bootstrap for timeline AVPT",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/7"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "5d6a9d0d331b7f4650af281341f7a6b89f6eea54",
-          "short_sha": "5d6a9d0",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 6,
-          "pr_title": "Add AVPT shared observability companion workflow (dry-run)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/6"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -474,8 +426,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "53fe6f9b5aaf22d9ba3e712e6dec19bec4e63abb",
-        "short_sha": "53fe6f9",
+        "sha": "2449f90610cd970c5fc5834602fa15b541a7f4fc",
+        "short_sha": "2449f90",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -483,20 +435,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "257c588b31358fa600e9f205614207f4dae441e0",
-          "short_sha": "257c588",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 4,
-          "pr_title": "Integrate shared AVPT rollout workflow (SHA-pinned)",
-          "pr_url": "https://github.com/iwdansereau-ops/otel-collector-config/pull/4"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -551,30 +489,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "695d247355c25291ebd3935fea37ba79af816458",
-        "short_sha": "695d247",
+        "sha": "b08f7bf75028249f456bd7fb441aa6034cc13d9b",
+        "short_sha": "b08f7bf",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "cd0387cae4d665c22cc363801305819814c81bc5",
-          "short_sha": "cd0387c",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "Integrate shared AVPT workflow (inert dry-run rollout)",
-          "pr_url": "https://github.com/iwdansereau-ops/otel-collector-tuner/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -586,30 +509,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a08f0f80342ac0a4511744f18a316248df742392",
-        "short_sha": "a08f0f8",
+        "sha": "b31f5c077c525fcbc41a5cf997322d173cd623f7",
+        "short_sha": "b31f5c0",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "7eb3ca663a56d60dbba94e62ecbe5600497733d6",
-          "short_sha": "7eb3ca6",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "Integrate shared AVPT deploy workflow (dry-run, race-backed)",
-          "pr_url": "https://github.com/iwdansereau-ops/otelharness/pull/1"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -661,30 +569,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7834e3c2268072b12dd63fe13ef2c4eca09bc681",
-        "short_sha": "7834e3c",
+        "sha": "cd024e2be3ba0dc157bf5c1419fb649782e0ff16",
+        "short_sha": "cd024e2",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "d51408ed40b45344b101c5c4ee67d337928e920b",
-          "short_sha": "d51408e",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 2,
-          "pr_title": "Integrate shared AVPT reusable workflow (SHA-pinned, dry-run)",
-          "pr_url": "https://github.com/iwdansereau-ops/terraform-qs-refresh/pull/2"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
