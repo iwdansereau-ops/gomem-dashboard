@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T21:49:56Z",
+  "generated_at": "2026-07-11T22:58:06Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "4e033c739fe50c9cd470132c8005e23297877b19",
-        "short_sha": "4e033c7",
+        "sha": "80ea95a46e2eaf67ee08dcd0ddf95ef5c569fac1",
+        "short_sha": "80ea95a",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -30,20 +30,6 @@
           "pr_number": 8,
           "pr_title": "fix: release failed cycles and restore AVPT telemetry",
           "pr_url": "https://github.com/iwdansereau-ops/avpt-cicd-dashboard/pull/8"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "c528d91540e821745f42f447b503a295bcece6ba",
-          "short_sha": "c528d91",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 7,
-          "pr_title": "fix(aws-staging): fail-closed secrets + durable ledger volume",
-          "pr_url": "https://github.com/iwdansereau-ops/avpt-cicd-dashboard/pull/7"
         },
         {
           "verdict": "NONE",
@@ -71,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "b8cfb5413ceb1362d8630118b664ec3948ae4366",
-        "short_sha": "b8cfb54",
+        "sha": "081b4e6056be0bb200be60fe2b2d1c2fa447635e",
+        "short_sha": "081b4e6",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -106,30 +92,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "5c6f010418331d2d77452e61f48b3b9f1e2a32ee",
-        "short_sha": "5c6f010",
+        "sha": "b1291a0d65d4f72e228fb8f745834c526ba45fb2",
+        "short_sha": "b1291a0",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "6eba7b2759e9f82d67515f979c9c3889c227d2c1",
-          "short_sha": "6eba7b2",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 3,
-          "pr_title": "Harden read-only CloudWatch telemetry bridge (fail-closed, OIDC, human-only apply)",
-          "pr_url": "https://github.com/iwdansereau-ops/infinity-engine-resilience/pull/3"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -201,8 +172,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e1917880cd7b72469563e43221bbe5dbce47fe75",
-        "short_sha": "e191788",
+        "sha": "c9fe6f59c1ae574f94e416c7308d78ac4626bddb",
+        "short_sha": "c9fe6f5",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -213,16 +184,16 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "714edaaf84aa0f7be8d0c6b49da99648651ed832",
-          "short_sha": "714edaa",
+          "sha": "3baf15ec9fe038ee0213bdc2f7645e3055f9ef79",
+          "short_sha": "3baf15e",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
-          "pr_number": 10,
-          "pr_title": "feat: canonical deployable AWS service (Lambda + Terraform, staging-first)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/10"
+          "pr_number": 11,
+          "pr_title": "chore(main): release 0.3.0",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/11"
         }
       ],
       "worst_verdict": "NONE",
@@ -236,8 +207,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "426b4d3fc7b7bb01b72afdc07bae1c7612d4407a",
-        "short_sha": "426b4d3",
+        "sha": "954cebc4716e5f8f7d50be1b03c67734a6130fba",
+        "short_sha": "954cebc",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -258,34 +229,6 @@
           "pr_number": 5,
           "pr_title": "Harden AI gateway infra: region validation, DLQ, CI security scan",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/5"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "4d25705480fc9435b465e3658129df721006dc84",
-          "short_sha": "4d25705",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 4,
-          "pr_title": "Harden AI-gateway infra: DLQ, alarms, validation, security scanning",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/4"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "029bad173d328d2ba2e541511a3f9c31a621e688",
-          "short_sha": "029bad1",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 3,
-          "pr_title": "Enforce library-only boundary; remove colliding AWS deploy surface",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/3"
         },
         {
           "verdict": "NONE",
@@ -313,30 +256,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "f25a125930128eb250c8d4dfcd1e598fc72feb0f",
-        "short_sha": "f25a125",
+        "sha": "909195e21bc99da07104f99eae657843f60ef3b7",
+        "short_sha": "909195e",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "cc6f35f36b316b1baabacf83b3e2a00db4067a89",
-          "short_sha": "cc6f35f",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 2,
-          "pr_title": "Add reproducible deploy/rollback path and readiness tooling",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-chronicle/pull/2"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -348,8 +276,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "8703cf9c9a1c1ac5e19b0d685d0db82c4e14ba1a",
-        "short_sha": "8703cf9",
+        "sha": "cd6ed71e9f8f02af2837465f6eb773f3fd5437fa",
+        "short_sha": "cd6ed71",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -384,20 +312,6 @@
           "pr_number": 18,
           "pr_title": "harden: GitHub Pages custom-domain preflight for console.odisena.com",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/18"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "ac3410b1a6448dc0e0bc6704dd37e564a12df552",
-          "short_sha": "ac3410b",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 17,
-          "pr_title": "Harden console for GitHub Pages (CSP, Pages-only deploy, no custom-domain auth)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/17"
         },
         {
           "verdict": "NONE",
@@ -439,8 +353,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "28fd57b7a0fabbcdcfa0015436535444ec3e966b",
-        "short_sha": "28fd57b",
+        "sha": "16faf3740f1e8477c42b6429c3cbba1fbff50769",
+        "short_sha": "16faf37",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -465,20 +379,6 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "616f8a1483d306726365f7af8148ab7951368669",
-          "short_sha": "616f8a1",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 7,
-          "pr_title": "Master-console hardening: DNS/HTTPS verifier, inert CI gate, 000000 fix",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-master/pull/7"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
           "sha": "205e7b028fe10a45781f211e8be0ecdbccfcc4f6",
           "short_sha": "205e7b0",
           "description": null,
@@ -489,20 +389,6 @@
           "pr_number": 6,
           "pr_title": "Harden master console: security headers, DNS/HTTPS verifier, health checks, runbook",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-master/pull/6"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "fd497337b3bc384d5896103b0bcc433540fe295c",
-          "short_sha": "fd49733",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 5,
-          "pr_title": "Add HOLD-aware domain gate + deployment-readiness safeguards",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-master/pull/5"
         },
         {
           "verdict": "NONE",
@@ -530,8 +416,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "d18a008366d9e004ae49c20127fb38e9648b33d3",
-        "short_sha": "d18a008",
+        "sha": "7ba826f997f3a3a71305deb49d704efc7865bcf7",
+        "short_sha": "7ba826f",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -550,8 +436,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "4812935c6f027eeaf359a0ff55288d8360d7413e",
-        "short_sha": "4812935",
+        "sha": "ac421e889944c548e96cd545710b6efb31c13cdd",
+        "short_sha": "ac421e8",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -559,6 +445,62 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "a4e21149cbcaf7e4d71c12d4ea705b1ad7f86604",
+          "short_sha": "a4e2114",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 8,
+          "pr_title": "chore(deps): bump playwright from 1.48.2 to 1.61.1 in /qa",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/8"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "41c2636978e52fde7717e3912a64450f1d6bf21f",
+          "short_sha": "41c2636",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 7,
+          "pr_title": "chore(ci): bump actions/checkout from 4 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/7"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "1dcb9a1767db1cdb8c2194b28fb30bf3938af815",
+          "short_sha": "1dcb9a1",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 6,
+          "pr_title": "chore(ci): bump actions/setup-node from 4 to 6",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/6"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "ccc53b4ef39ae8709140ac22e3f4e6e9a83b4b2a",
+          "short_sha": "ccc53b4",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 5,
+          "pr_title": "chore(ci): bump actions/upload-artifact from 4 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/5"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -572,20 +514,6 @@
           "pr_number": 4,
           "pr_title": "ci: enforce production validation and harden static deployment",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/4"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "4636b917861da38abe2b0ff0188fffda13b00082",
-          "short_sha": "4636b91",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 2,
-          "pr_title": "Consolidated public-site hardening (CI, headers, integrity, deploy verify, DNS/TLS preflight)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/2"
         }
       ],
       "worst_verdict": "NONE",
