@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T23:57:36Z",
+  "generated_at": "2026-07-11T00:56:14Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -43,8 +43,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "47c56dcc5cea65a6c84664f991743812d64dff71",
-        "short_sha": "47c56dc",
+        "sha": "2b5fa41c0d53d25af90dd565fe84723e32ad2f22",
+        "short_sha": "2b5fa41",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -297,8 +297,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "82daff9756e79fff03684461f118102a86dc0883",
-        "short_sha": "82daff9",
+        "sha": "4fdebfc5f4df759265626aff239bf4614d0ac757",
+        "short_sha": "4fdebfc",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -326,6 +326,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "7daea88224be3b0e53a2d4d7afd586bf262c4a95",
+          "short_sha": "7daea88",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 15,
+          "pr_title": "Harden public console: remove internal leakage, label sample data, improve a11y",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/15"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -386,8 +400,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3dcc3557e5a70911e4b8b0f63f3c690fdf33799b",
-        "short_sha": "3dcc355",
+        "sha": "75a7b9ae3d52da0edb17471ebbc30c76cb905bd3",
+        "short_sha": "75a7b9a",
         "description": null,
         "target_url": null,
         "updated_at": null,
