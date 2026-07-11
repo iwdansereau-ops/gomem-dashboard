@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T01:42:43Z",
+  "generated_at": "2026-07-11T02:46:48Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -43,8 +43,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "b129e2060000b337e873083da53f655ce4fd8f55",
-        "short_sha": "b129e20",
+        "sha": "e819e6a078ad17813605430b60cc37d59e5eb190",
+        "short_sha": "e819e6a",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -297,8 +297,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "4fdebfc5f4df759265626aff239bf4614d0ac757",
-        "short_sha": "4fdebfc",
+        "sha": "493c8c71e724d34d3fd4d541219579aed9aa58b5",
+        "short_sha": "493c8c7",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -408,7 +408,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "1f79e499c5b9c0efc1d717d606f8fe432a4d55d1",
+          "short_sha": "1f79e49",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 8,
+          "pr_title": "Make /about the canonical Founder destination + discoverability fixes",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/8"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
