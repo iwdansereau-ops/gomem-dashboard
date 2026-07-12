@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T23:43:25Z",
+  "generated_at": "2026-07-12T00:47:10Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "1f0d59563a686c4586852d9b8886ea2b569fa569",
-        "short_sha": "1f0d595",
+        "sha": "ac660aaabaf89bb33ff258a39b6af26276f7d498",
+        "short_sha": "ac660aa",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -100,7 +100,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "b2644a895d3a7885aa40acc39df3a905966608c5",
+          "short_sha": "b2644a8",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 4,
+          "pr_title": "Add static infra-hardening guards (no-apply-path, OIDC-lock, terraform-validate)",
+          "pr_url": "https://github.com/iwdansereau-ops/infinity-engine-resilience/pull/4"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -256,8 +271,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a4f974eb67dc3f8e275eb09909e7763eb2180d90",
-        "short_sha": "a4f974e",
+        "sha": "5a870cb2f233cacd4107068ff2e4904937a38d9f",
+        "short_sha": "5a870cb",
         "description": null,
         "target_url": null,
         "updated_at": null,
