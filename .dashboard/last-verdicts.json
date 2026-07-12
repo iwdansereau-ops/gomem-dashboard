@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-12T04:52:43Z",
+  "generated_at": "2026-07-12T05:44:03Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3b49b5f9703ce7f089d65e0bbf7e1a4b4415f676",
-        "short_sha": "3b49b5f",
+        "sha": "4f18b63dbd375d539febba65594083a13ec2cdaa",
+        "short_sha": "4f18b63",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -271,15 +271,30 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ec789051fac453cdb3e7d0b8eae47bc511449841",
-        "short_sha": "ec78905",
+        "sha": "4843c6266c07efe131cd302d7167920c51166b7f",
+        "short_sha": "4843c62",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "24e03e6036d595edf00e7aa77a51b20771de5030",
+          "short_sha": "24e03e6",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 3,
+          "pr_title": "Compose the Chronicle publishing shell as the indexable root surface",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-chronicle/pull/3"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -380,6 +395,20 @@
         {
           "verdict": "NONE",
           "state": "none",
+          "sha": "542ff8725396dc02d7d2b96a63af8f694f7164da",
+          "short_sha": "542ff87",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 9,
+          "pr_title": "Port sparse Master public vestibule for master.odisena.com",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-master/pull/9"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
           "sha": "8ebe81b8ef9ed77aacc868b88626b375600eca73",
           "short_sha": "8ebe81b",
           "description": null,
@@ -439,7 +468,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "c1f8125e4882918b0d24cb6d1aee1e4dc2004514",
+          "short_sha": "c1f8125",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 10,
+          "pr_title": "Port approved apex Studio SPA into odisena.com production source",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/10"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
