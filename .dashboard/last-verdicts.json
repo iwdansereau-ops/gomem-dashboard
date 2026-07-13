@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T05:58:51Z",
+  "generated_at": "2026-07-13T06:44:04Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ea2a72586a05266fb31d13cf6d4a9c315f5ff547",
-        "short_sha": "ea2a725",
+        "sha": "7b7cc7407b353a141b96806ebce57ea53f444908",
+        "short_sha": "7b7cc74",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -279,7 +279,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "1fa21d00e1d2979a1fdda799954e03207a28a71e",
+          "short_sha": "1fa21d0",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 5,
+          "pr_title": "Chronicle: accessible relationship map + rights/gate data + .env hygiene",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-chronicle/pull/5"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -300,6 +315,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "97ef1ae927d827c388fad468ae93fa85e98c37d0",
+          "short_sha": "97ef1ae",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 20,
+          "pr_title": "System map surface + runbook HTML sanitizer",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/20"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -451,8 +480,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ac421e889944c548e96cd545710b6efb31c13cdd",
-        "short_sha": "ac421e8",
+        "sha": "801b24c9e3b7bcdd059018a298454f5f1a44da0f",
+        "short_sha": "801b24c",
         "description": null,
         "target_url": null,
         "updated_at": null,
