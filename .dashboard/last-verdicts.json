@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T05:41:13Z",
+  "generated_at": "2026-07-14T06:50:13Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -8,8 +8,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "80ea95a46e2eaf67ee08dcd0ddf95ef5c569fac1",
-        "short_sha": "80ea95a",
+        "sha": "2c4e9a2cfd8f8906609c5d24e729ef0b5e1bf6bf",
+        "short_sha": "2c4e9a2",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -17,20 +17,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "0ec300b942153c03bb3e7bbe11957979f8e5aa4e",
-          "short_sha": "0ec300b",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 9,
-          "pr_title": "feat(security): reusable fleet-wide secret scanning + metrics_1d ownership triage",
-          "pr_url": "https://github.com/iwdansereau-ops/avpt-cicd-dashboard/pull/9"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -71,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3805d1d140db61306ecec86637478f75061321b8",
-        "short_sha": "3805d1d",
+        "sha": "4405c67cd333c10dc4e368c22b90f45f450f89e8",
+        "short_sha": "4405c67",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -106,8 +92,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "b1291a0d65d4f72e228fb8f745834c526ba45fb2",
-        "short_sha": "b1291a0",
+        "sha": "6910640365893541794a6f62b735d1777990767c",
+        "short_sha": "6910640",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -115,20 +101,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "f72459f9c5bed506f688df8f6f84fe393c9762b9",
-          "short_sha": "f72459f",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 5,
-          "pr_title": "Document Neon schema ownership gap + P0 hardening handoff",
-          "pr_url": "https://github.com/iwdansereau-ops/infinity-engine-resilience/pull/5"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -319,8 +291,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "1bd5dfec517cf13e065863a99d4fd8c45fd21134",
-        "short_sha": "1bd5dfe",
+        "sha": "c100494d0159ce9d968c51a24e0ed149fc0f8c57",
+        "short_sha": "c100494",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -528,8 +500,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "6b75749e0c325ceccbfb87da33299a4c232e49c2",
-        "short_sha": "6b75749",
+        "sha": "3b0b01cdb334c732a417bf801653ae2e7dd8e87a",
+        "short_sha": "3b0b01c",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -537,20 +509,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "2cc98c83e2a7c9078bf9a11bfa26d8810ba10211",
-          "short_sha": "2cc98c8",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 10,
-          "pr_title": "fix(api): privacy-safe /api/metrics health endpoint",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/10"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -568,8 +526,8 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "a4e21149cbcaf7e4d71c12d4ea705b1ad7f86604",
-          "short_sha": "a4e2114",
+          "sha": "1fb4c17b0a5db07ac38cd5257299fb56c2b05b2f",
+          "short_sha": "1fb4c17",
           "description": null,
           "target_url": null,
           "updated_at": null,
