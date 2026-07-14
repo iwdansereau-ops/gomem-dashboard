@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T21:51:57Z",
+  "generated_at": "2026-07-14T22:53:46Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "f4a9e4e8691e08b7aa53d57547e14057aca2a93c",
-        "short_sha": "f4a9e4e",
+        "sha": "47578c493d71a37b7231205995268bc8f387b883",
+        "short_sha": "47578c4",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -182,8 +182,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "4e16376fef97a5cff620983d3e0891e7b44b0013",
-        "short_sha": "4e16376",
+        "sha": "0ae1dbbe69667cc93696a82716f567b278dc5a83",
+        "short_sha": "0ae1dbb",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -306,8 +306,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "900342ab7a7aab9cceff874bcd7f0ec385585b98",
-        "short_sha": "900342a",
+        "sha": "e5932de6fe35ff9047e87d685c0afa3e29950df9",
+        "short_sha": "e5932de",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -350,6 +350,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "7f97d18c422662560aa6a2da027a2f88acb52be8",
+          "short_sha": "7f97d18",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 21,
+          "pr_title": "Align public founder identity with LinkedIn",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/21"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -515,8 +529,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "123f73f45db947467d0b3d14abd51165508987af",
-        "short_sha": "123f73f",
+        "sha": "590551e0e4832d9d4b2a7be796368e20d805715e",
+        "short_sha": "590551e",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -524,20 +538,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "ea3509cb7101925d1671f9ffbece3a628dd7b33a",
-          "short_sha": "ea3509c",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 13,
-          "pr_title": "Refine homepage for readability and comprehension (pass 2)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/13"
-        },
         {
           "verdict": "NONE",
           "state": "none",
