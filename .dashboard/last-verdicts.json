@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T04:44:18Z",
+  "generated_at": "2026-07-14T05:41:13Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -17,6 +17,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "0ec300b942153c03bb3e7bbe11957979f8e5aa4e",
+          "short_sha": "0ec300b",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 9,
+          "pr_title": "feat(security): reusable fleet-wide secret scanning + metrics_1d ownership triage",
+          "pr_url": "https://github.com/iwdansereau-ops/avpt-cicd-dashboard/pull/9"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -57,8 +71,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "5de6e404884b0e3568b34d0b0505b4779f8db470",
-        "short_sha": "5de6e40",
+        "sha": "3805d1d140db61306ecec86637478f75061321b8",
+        "short_sha": "3805d1d",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -101,6 +115,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "f72459f9c5bed506f688df8f6f84fe393c9762b9",
+          "short_sha": "f72459f",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 5,
+          "pr_title": "Document Neon schema ownership gap + P0 hardening handoff",
+          "pr_url": "https://github.com/iwdansereau-ops/infinity-engine-resilience/pull/5"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -291,8 +319,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e2dcdb261923bb8eda482030a6c1fb22d0580952",
-        "short_sha": "e2dcdb2",
+        "sha": "1bd5dfec517cf13e065863a99d4fd8c45fd21134",
+        "short_sha": "1bd5dfe",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -509,6 +537,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "2cc98c83e2a7c9078bf9a11bfa26d8810ba10211",
+          "short_sha": "2cc98c8",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 10,
+          "pr_title": "fix(api): privacy-safe /api/metrics health endpoint",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/10"
+        },
         {
           "verdict": "NONE",
           "state": "none",
