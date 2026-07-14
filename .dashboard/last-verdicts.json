@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T20:48:03Z",
+  "generated_at": "2026-07-14T21:51:57Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a59410b673c767c927f8c2c3c9232329acd75a15",
-        "short_sha": "a59410b",
+        "sha": "f4a9e4e8691e08b7aa53d57547e14057aca2a93c",
+        "short_sha": "f4a9e4e",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -495,8 +495,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "d4ea3e5156c624466acd69ae81957a64de87bb85",
-        "short_sha": "d4ea3e5",
+        "sha": "e8dc9feda9646a29f4afe20c9da1ec451b402efa",
+        "short_sha": "e8dc9fe",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -515,8 +515,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "6256d40642627f0b98ed0398dcaa33d074db182b",
-        "short_sha": "6256d40",
+        "sha": "123f73f45db947467d0b3d14abd51165508987af",
+        "short_sha": "123f73f",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -527,16 +527,16 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "56e7283d92d92f2d1fc1e994494d60d33f350235",
-          "short_sha": "56e7283",
+          "sha": "ea3509cb7101925d1671f9ffbece3a628dd7b33a",
+          "short_sha": "ea3509c",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
-          "pr_number": 12,
-          "pr_title": "Redesign homepage around governed operating-system narrative",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/12"
+          "pr_number": 13,
+          "pr_title": "Refine homepage for readability and comprehension (pass 2)",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/13"
         },
         {
           "verdict": "NONE",
