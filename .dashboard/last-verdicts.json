@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T18:52:02Z",
+  "generated_at": "2026-07-14T19:58:57Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "54281085e580933cdbcd0744f348e53259920604",
-        "short_sha": "5428108",
+        "sha": "5b0a07a751726fef91ff60944a4d779554084bbc",
+        "short_sha": "5b0a07a",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -155,7 +155,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "6a8e19fb1bf65f9cd063194481592a49777ac8a7",
+          "short_sha": "6a8e19f",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 1,
+          "pr_title": "Add illustrated preview edition for PUB-007, The 5th Lantern — Book One",
+          "pr_url": "https://github.com/iwdansereau-ops/library-of-alexandria/pull/1"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -291,8 +306,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "d17323d2ad66726e66ed7880c3dad477347db827",
-        "short_sha": "d17323d",
+        "sha": "45c30dc1fd8f0708c02ceab551b89c42410df57e",
+        "short_sha": "45c30dc",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -500,8 +515,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3b0b01cdb334c732a417bf801653ae2e7dd8e87a",
-        "short_sha": "3b0b01c",
+        "sha": "6256d40642627f0b98ed0398dcaa33d074db182b",
+        "short_sha": "6256d40",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -526,15 +541,15 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "1fb4c17b0a5db07ac38cd5257299fb56c2b05b2f",
-          "short_sha": "1fb4c17",
+          "sha": "2939188df3f355fa6d9b230ef24f5b222b4f2341",
+          "short_sha": "2939188",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
           "pr_number": 8,
-          "pr_title": "chore(deps): bump playwright from 1.48.2 to 1.61.1 in /qa",
+          "pr_title": "chore(deps): Bump playwright from 1.48.2 to 1.61.1 in /qa",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/8"
         },
         {
