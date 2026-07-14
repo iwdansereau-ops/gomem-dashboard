@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T22:53:46Z",
+  "generated_at": "2026-07-14T23:56:31Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "47578c493d71a37b7231205995268bc8f387b883",
-        "short_sha": "47578c4",
+        "sha": "dfa45a5055deae39561f5f940a183e7d970adeb7",
+        "short_sha": "dfa45a5",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -306,8 +306,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e5932de6fe35ff9047e87d685c0afa3e29950df9",
-        "short_sha": "e5932de",
+        "sha": "a4fbaa0a6d94977e908ccfc3b48f24b8c7b7c98a",
+        "short_sha": "a4fbaa0",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -529,8 +529,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "590551e0e4832d9d4b2a7be796368e20d805715e",
-        "short_sha": "590551e",
+        "sha": "a09e18c17b2a763815ac5fbb3259f203a052cfb3",
+        "short_sha": "a09e18c",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -555,15 +555,15 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "2939188df3f355fa6d9b230ef24f5b222b4f2341",
-          "short_sha": "2939188",
+          "sha": "553a78b869cf4a5e931e886cb9267d3075c672b2",
+          "short_sha": "553a78b",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
           "pr_number": 8,
-          "pr_title": "chore(deps): Bump playwright from 1.48.2 to 1.61.1 in /qa",
+          "pr_title": "chore(deps): bump playwright from 1.48.2 to 1.61.1 in /qa",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/8"
         },
         {
