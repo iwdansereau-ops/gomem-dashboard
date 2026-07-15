@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T01:40:02Z",
+  "generated_at": "2026-07-15T02:41:34Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "705e49f1a0d6461f980e0770ace8aaeccf826df6",
-        "short_sha": "705e49f",
+        "sha": "fc0e67891aea3d230c0f5bef7563d0d10f2e9345",
+        "short_sha": "fc0e678",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -306,8 +306,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7d0fac124774f0605fefe7cc2eaa754447531154",
-        "short_sha": "7d0fac1",
+        "sha": "5a64072d0410180c93400c8c28e91d6ac8ca4c26",
+        "short_sha": "5a64072",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -529,8 +529,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "003d9d3b575b574f1fcebefabe24d711bf4c7f7d",
-        "short_sha": "003d9d3",
+        "sha": "a3e76497196dcc3be6f3c1fcd02876b76c71ff74",
+        "short_sha": "a3e7649",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -538,20 +538,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "35964aa28b7b4b1f891c896a1994e08a8277eeac",
-          "short_sha": "35964aa",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 20,
-          "pr_title": "Add sitewide living-schematic visual system",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/20"
-        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -569,8 +555,8 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "f80d8484a1a8629d83ebb92823c72d62c3ac6dd6",
-          "short_sha": "f80d848",
+          "sha": "6d2b18b831242b27277fc8bddf7a46ede6b5ce88",
+          "short_sha": "6d2b18b",
           "description": null,
           "target_url": null,
           "updated_at": null,
