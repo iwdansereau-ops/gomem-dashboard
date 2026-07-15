@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T00:43:16Z",
+  "generated_at": "2026-07-15T01:40:02Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "c3df20acc8261991a21ec5f2128b78f07d883a44",
-        "short_sha": "c3df20a",
+        "sha": "705e49f1a0d6461f980e0770ace8aaeccf826df6",
+        "short_sha": "705e49f",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -306,8 +306,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "2cb11be8a86c390dc00c1bddcd8c2cd82383bbee",
-        "short_sha": "2cb11be",
+        "sha": "7d0fac124774f0605fefe7cc2eaa754447531154",
+        "short_sha": "7d0fac1",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -541,6 +541,20 @@
         {
           "verdict": "NONE",
           "state": "none",
+          "sha": "35964aa28b7b4b1f891c896a1994e08a8277eeac",
+          "short_sha": "35964aa",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 20,
+          "pr_title": "Add sitewide living-schematic visual system",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/20"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
           "sha": "d8b60cae766009e809b2750f4fa093540a72a81a",
           "short_sha": "d8b60ca",
           "description": null,
@@ -555,8 +569,8 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "553a78b869cf4a5e931e886cb9267d3075c672b2",
-          "short_sha": "553a78b",
+          "sha": "f80d8484a1a8629d83ebb92823c72d62c3ac6dd6",
+          "short_sha": "f80d848",
           "description": null,
           "target_url": null,
           "updated_at": null,
@@ -569,8 +583,8 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "41c2636978e52fde7717e3912a64450f1d6bf21f",
-          "short_sha": "41c2636",
+          "sha": "fdc5b79baaf4ffd22ad067afb2a75666a64bef7a",
+          "short_sha": "fdc5b79",
           "description": null,
           "target_url": null,
           "updated_at": null,
@@ -583,15 +597,15 @@
         {
           "verdict": "NONE",
           "state": "none",
-          "sha": "1dcb9a1767db1cdb8c2194b28fb30bf3938af815",
-          "short_sha": "1dcb9a1",
+          "sha": "fe26c71745bed71f8d9fbdb9ece4b7bb22d46dc6",
+          "short_sha": "fe26c71",
           "description": null,
           "target_url": null,
           "updated_at": null,
           "worst_function": null,
           "worst_bytes": null,
           "pr_number": 6,
-          "pr_title": "chore(ci): bump actions/setup-node from 4 to 6",
+          "pr_title": "chore(ci): bump actions/setup-node from 4 to 7",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/6"
         },
         {
