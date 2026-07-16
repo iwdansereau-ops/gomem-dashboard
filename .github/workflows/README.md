@@ -26,8 +26,10 @@ That's it. Then in your service:
 
 1. Enable pprof: `import _ "net/http/pprof"` on a reachable port.
 2. Expose `/debug/memstats` (4-line handler in the top-level README).
-3. Add repo secrets `STAGING_PPROF_URL` (required) and
-   `STAGING_PPROF_TOKEN` (optional bearer token).
+3. Add repo secrets `STAGING_PPROF_URL` and
+   `STAGING_PPROF_TOKEN` (optional bearer token). If `STAGING_PPROF_URL`
+   is not set, the memory check skips gracefully (no red runs) until you
+   configure it — set it to activate the gate.
 4. Configure branch protection to require the
    `staging-memory-check/verdict` context (see
    [`scripts/ci/require-branch-protection.sh`](../../scripts/ci/require-branch-protection.sh)).
