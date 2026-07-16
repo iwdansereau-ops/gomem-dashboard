@@ -92,8 +92,11 @@ on:
 
     secrets:
       pprof_url:
-        description: "Base URL of the staging pprof endpoint, e.g. https://staging.internal:6060."
-        required: true
+        description: >-
+          Base URL of the staging pprof endpoint, e.g. https://staging.internal:6060.
+          Optional: when neither this secret nor override_pprof_url is set, the
+          memory check is skipped gracefully instead of failing at startup.
+        required: false
       pprof_token:
         description: "Optional bearer token for /debug/pprof and /debug/memstats."
         required: false
@@ -120,11 +123,35 @@ permissions:
   statuses: write
 
 jobs:
-  memory-check:
+  # Resolves whether a pprof endpoint is configured at all. Secrets are not
+  # readable in job-level `if` expressions, so this tiny job surfaces the
+  # answer as an output the real job can gate on. When no endpoint is
+  # configured the check is skipped gracefully instead of producing a
+  # startup_failure on every deployment_status event.
+  preflight:
     if: >
       github.event_name != 'deployment_status' ||
       (github.event.deployment_status.state == 'success' &&
        github.event.deployment.environment == inputs.environment)
+    runs-on: ubuntu-latest
+    outputs:
+      configured: ${{ steps.check.outputs.configured }}
+    steps:
+      - name: Check pprof endpoint configuration
+        id: check
+        env:
+          PPROF_URL: ${{ secrets.pprof_url || inputs.override_pprof_url }}
+        run: |
+          if [[ -n "$PPROF_URL" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=staging-memory-check skipped::No pprof endpoint configured. Set the STAGING_PPROF_URL repo secret (or pass override_pprof_url on manual dispatch) to enable the staging memory gate."
+          fi
+
+  memory-check:
+    needs: preflight
+    if: needs.preflight.outputs.configured == 'true'
     runs-on: ${{ inputs.runs_on }}
     timeout-minutes: 30
 
