@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T07:40:28Z",
+  "generated_at": "2026-07-16T08:57:09Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "4b0215fc26807e9910436f47894a9036afc592e9",
-        "short_sha": "4b0215f",
+        "sha": "a9bbc58b2ecc5ad77a271e89f1de49f588ad1f6d",
+        "short_sha": "a9bbc58",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -517,7 +517,22 @@
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [],
+      "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "393eba003898d1b7b570e2f31457b2981655acdc",
+          "short_sha": "393eba0",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 22,
+          "pr_title": "Knowledge Canon: grow to 106 entries (2026-07-16 expansion)",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/22"
+        }
+      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
