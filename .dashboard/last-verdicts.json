@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T08:57:09Z",
+  "generated_at": "2026-07-16T09:53:44Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a9bbc58b2ecc5ad77a271e89f1de49f588ad1f6d",
-        "short_sha": "a9bbc58",
+        "sha": "05460e2a1ac111bb8db023909427b6c6c9fac00a",
+        "short_sha": "05460e2",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -147,8 +147,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "3a1ddf2c472b2a028642d02acffccbc925cd32c0",
-        "short_sha": "3a1ddf2",
+        "sha": "d077210754ca80610fca1b2e2b815fe8c2f0d90c",
+        "short_sha": "d077210",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -509,30 +509,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ea20c384d83733a930172123e66c8d4d32fdb43e",
-        "short_sha": "ea20c38",
+        "sha": "c8a67c93db104b8eaade30adfd5204f169c786e7",
+        "short_sha": "c8a67c9",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "393eba003898d1b7b570e2f31457b2981655acdc",
-          "short_sha": "393eba0",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 22,
-          "pr_title": "Knowledge Canon: grow to 106 entries (2026-07-16 expansion)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/22"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
