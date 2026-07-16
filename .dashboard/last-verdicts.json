@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T12:39:39Z",
+  "generated_at": "2026-07-16T13:40:22Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7edbbb5f30c5c75010f760d33e3ee0bb7467a46e",
-        "short_sha": "7edbbb5",
+        "sha": "6870b7b64201bbb435ead5b98e21a41ef5718ce8",
+        "short_sha": "6870b7b",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -222,30 +222,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "c9fe6f59c1ae574f94e416c7308d78ac4626bddb",
-        "short_sha": "c9fe6f5",
+        "sha": null,
+        "short_sha": null,
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "3baf15ec9fe038ee0213bdc2f7645e3055f9ef79",
-          "short_sha": "3baf15e",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 11,
-          "pr_title": "chore(main): release 0.3.0",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/11"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -257,44 +242,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "954cebc4716e5f8f7d50be1b03c67734a6130fba",
-        "short_sha": "954cebc",
+        "sha": null,
+        "short_sha": null,
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "60cd326c18c50cd91168d74461732450e0485e6c",
-          "short_sha": "60cd326",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 5,
-          "pr_title": "Harden AI gateway infra: region validation, DLQ, CI security scan",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/5"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "034ce919fd83a27b2dd278a128bfe711cdeb201e",
-          "short_sha": "034ce91",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 2,
-          "pr_title": "fix: wire streaming path and add safe infrastructure gates",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway-contract/pull/2"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -306,8 +262,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "dbb7014e1a9ac1c56b063ac05c00db04a023f378",
-        "short_sha": "dbb7014",
+        "sha": null,
+        "short_sha": null,
         "description": null,
         "target_url": null,
         "updated_at": null,
