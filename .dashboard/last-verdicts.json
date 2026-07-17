@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T02:50:24Z",
+  "generated_at": "2026-07-17T03:44:35Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "892cad84720dd1224b31c737e9bcbe6f94b3bad4",
-        "short_sha": "892cad8",
+        "sha": "ab71e7c7f4a4f74b5b152e5d29e331aaba7c5f3c",
+        "short_sha": "ab71e7c",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -306,30 +306,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "67b8989f8a474a7c8fb3584079437a183a914a27",
-        "short_sha": "67b8989",
+        "sha": "f90ea374b48afaeed9541ad0069d5dec742bb82d",
+        "short_sha": "f90ea37",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "1fa21d00e1d2979a1fdda799954e03207a28a71e",
-          "short_sha": "1fa21d0",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 5,
-          "pr_title": "Chronicle: accessible relationship map + rights/gate data + .env hygiene",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-chronicle/pull/5"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -341,8 +326,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "cd6ed71e9f8f02af2837465f6eb773f3fd5437fa",
-        "short_sha": "cd6ed71",
+        "sha": "6710c76f1c557e7223417e7e80e9554bedb7e2fa",
+        "short_sha": "6710c76",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -363,20 +348,6 @@
           "pr_number": 21,
           "pr_title": "Align public founder identity with LinkedIn",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/21"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "97ef1ae927d827c388fad468ae93fa85e98c37d0",
-          "short_sha": "97ef1ae",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 20,
-          "pr_title": "System map surface + runbook HTML sanitizer",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/20"
         },
         {
           "verdict": "NONE",
@@ -509,30 +480,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "c8a67c93db104b8eaade30adfd5204f169c786e7",
-        "short_sha": "c8a67c9",
+        "sha": "ee355e831ccbf564682ca4fac6fca4116aa524c5",
+        "short_sha": "ee355e8",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "f5b6993bd786f5b4d192063c1050acc5274c5bd0",
-          "short_sha": "f5b6993",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 23,
-          "pr_title": "Fix apex 404s: identity/master/chronicle shells + legacy route redirects",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/23"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -544,8 +500,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "2e9787208ca479239261349b9e56c947def1fcc3",
-        "short_sha": "2e97872",
+        "sha": "2aec658f91ccb02f80f42eee764a24f80f28c04b",
+        "short_sha": "2aec658",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -553,20 +509,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "d8b60cae766009e809b2750f4fa093540a72a81a",
-          "short_sha": "d8b60ca",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 9,
-          "pr_title": "Comprehensive system overhaul: relationship map (neural-network constellation) + current-status surfaces, dark mode, site-wide cross-links",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/9"
-        },
         {
           "verdict": "NONE",
           "state": "none",
