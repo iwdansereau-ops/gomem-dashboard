@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T03:44:35Z",
+  "generated_at": "2026-07-17T04:45:22Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ab71e7c7f4a4f74b5b152e5d29e331aaba7c5f3c",
-        "short_sha": "ab71e7c",
+        "sha": "e0fd8794b0443c305dd117bd4f15369fbf94700e",
+        "short_sha": "e0fd879",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -231,6 +231,62 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "1e5d9fa15fb22299abf379b1d3f3b29a282561fc",
+          "short_sha": "1e5d9fa",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 17,
+          "pr_title": "ci: bump hashicorp/setup-terraform from 3 to 4",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/17"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "c189118244b01ee62f62a9a88874ad1cc5c50903",
+          "short_sha": "c189118",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 16,
+          "pr_title": "ci: bump actions/setup-node from 6 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/16"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "03b86065b95168d3ee7e0a03e241ef39583d5bad",
+          "short_sha": "03b8606",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 15,
+          "pr_title": "ci: bump actions/github-script from 7 to 9",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/15"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "3220f4a803ab7559d7e75c5f4d293f67c67d1194",
+          "short_sha": "3220f4a",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 14,
+          "pr_title": "ci: bump aws-actions/configure-aws-credentials from 4 to 6",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-ai-gateway/pull/14"
+        },
         {
           "verdict": "NONE",
           "state": "none",
