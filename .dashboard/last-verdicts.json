@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T16:54:53Z",
+  "generated_at": "2026-07-17T17:57:47Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7422e01157c31e72fc7417a891b819ef873a30e1",
-        "short_sha": "7422e01",
+        "sha": "dd883015a90c0c186df5e28a8718d62fa59d4a60",
+        "short_sha": "dd88301",
         "description": null,
         "target_url": null,
         "updated_at": null,
