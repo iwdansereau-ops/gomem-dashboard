@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T20:55:45Z",
+  "generated_at": "2026-07-18T21:54:01Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "a083625f5f2e1642ee053c7650b0d17a61411a27",
-        "short_sha": "a083625",
+        "sha": "30564cfb388ad64e42238969a984726fd54a9987",
+        "short_sha": "30564cf",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -536,30 +536,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e2e824b750d00c33046474805bec24915ef644a2",
-        "short_sha": "e2e824b",
+        "sha": "c3dd72209233ce956dfb26ad1aee4483fb9e33de",
+        "short_sha": "c3dd722",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "1c81366612b4a279fefc1060cac3e3a8e3545d1e",
-          "short_sha": "1c81366",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 27,
-          "pr_title": "Expand Knowledge Canon to 112 (July 18, 2026 edition)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/27"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
