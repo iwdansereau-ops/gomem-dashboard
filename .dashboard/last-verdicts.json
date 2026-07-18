@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T23:44:39Z",
+  "generated_at": "2026-07-18T00:42:06Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "1b77e7d91ff36cc390d3fe040a8164eb57ffc122",
-        "short_sha": "1b77e7d",
+        "sha": "3f9aeeaeaa24f185c52596f0293697bfada66bdb",
+        "short_sha": "3f9aeea",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -362,8 +362,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "7dca7bae6798c39baebb32a5ac00ce428a9c8788",
-        "short_sha": "7dca7ba",
+        "sha": "d5abede8047eac06c4298bb25a221b019aa48e1e",
+        "short_sha": "d5abede",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -583,6 +583,20 @@
         {
           "verdict": "NONE",
           "state": "none",
+          "sha": "64e50e7048c24c5b145243dab4056ecfc6b5ab71",
+          "short_sha": "64e50e7",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 23,
+          "pr_title": "chore(ci): bump actions/setup-node from 4 to 7",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/23"
+        },
+        {
+          "verdict": "NONE",
+          "state": "none",
           "sha": "6d2b18b831242b27277fc8bddf7a46ede6b5ce88",
           "short_sha": "6d2b18b",
           "description": null,
@@ -607,20 +621,6 @@
           "pr_number": 7,
           "pr_title": "chore(ci): bump actions/checkout from 4 to 7",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/7"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "fe26c71745bed71f8d9fbdb9ece4b7bb22d46dc6",
-          "short_sha": "fe26c71",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 6,
-          "pr_title": "chore(ci): bump actions/setup-node from 4 to 7",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-website/pull/6"
         },
         {
           "verdict": "NONE",
