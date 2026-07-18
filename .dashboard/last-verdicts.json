@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T02:41:51Z",
+  "generated_at": "2026-07-18T03:49:42Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -57,8 +57,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "8079eab6c06795c94a74f9c184851ffd7ed863ed",
-        "short_sha": "8079eab",
+        "sha": "b794b50b3ca7202c93418dac66502267b303b1aa",
+        "short_sha": "b794b50",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -536,30 +536,15 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "ee355e831ccbf564682ca4fac6fca4116aa524c5",
-        "short_sha": "ee355e8",
+        "sha": "bd5945b5cee8b00993504b02414840085a4936c5",
+        "short_sha": "bd5945b",
         "description": null,
         "target_url": null,
         "updated_at": null,
         "worst_function": null,
         "worst_bytes": null
       },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "771a81029ebaeaaa98adbc52f4e125c1acde98e6",
-          "short_sha": "771a810",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 24,
-          "pr_title": "Knowledge Canon: expand to 109 (July 17, 2026 edition)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-timeline/pull/24"
-        }
-      ],
+      "pr_verdicts": [],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
