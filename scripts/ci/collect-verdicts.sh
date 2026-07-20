@@ -17,6 +17,8 @@
 #     {
 #       "full_name":   "org/repo",
 #       "default_branch": "main",
+#       "private":     false,   # always false in public output; private repos
+#                               # are excluded unless --include-private is set
 #       "default_branch_verdict": {  # tip of default branch
 #         "verdict":  "CLEAN|RETENTION_LEAK|ALLOC_CHURN|MIXED|UNKNOWN|NONE",
 #         "state":    "success|failure|error|pending|none",
@@ -54,6 +56,12 @@ SCOPE_NAME=""
 STATUS_CONTEXT="staging-memory-check/verdict"
 WORKFLOW_NAME_HINT="staging-memory-check"  # matches caller.staging-memory-check.yml
 INCLUDE_ARCHIVED=false
+# Private repos are EXCLUDED by default: this dataset is published to GitHub
+# Pages and committed to the repo, both of which are world-readable. Including a
+# private repo would leak its name, PR titles and commit SHAs. Opt in with
+# --include-private only when the output is kept on a private/authenticated
+# surface.
+INCLUDE_PRIVATE=false
 OUT_JSON="fleet-verdicts.json"
 PR_LIMIT=25       # cap PR scan per repo
 
@@ -69,6 +77,9 @@ Options:
   --workflow-hint STR     substring of caller workflow filename to prefer
                           (default: staging-memory-check)
   --include-archived      include archived repos
+  --include-private       include private repos (DANGER: only for output kept
+                          on a private/authenticated surface — never for the
+                          Pages dashboard or the committed snapshot)
   --pr-limit N            max open PRs to inspect per repo (default 25)
   --out-json PATH         output JSON path (default fleet-verdicts.json)
   -h, --help              show this help
@@ -84,6 +95,7 @@ while [[ $# -gt 0 ]]; do
     --status-context)   STATUS_CONTEXT="$2"; shift 2;;
     --workflow-hint)    WORKFLOW_NAME_HINT="$2"; shift 2;;
     --include-archived) INCLUDE_ARCHIVED=true; shift;;
+    --include-private)  INCLUDE_PRIVATE=true; shift;;
     --pr-limit)         PR_LIMIT="$2"; shift 2;;
     --out-json)         OUT_JSON="$2"; shift 2;;
     -h|--help)          usage; exit 0;;
@@ -122,6 +134,18 @@ fi
 if ! $INCLUDE_ARCHIVED; then
   jq '[.[] | select(.archived != true)]' "$repos_json" > "${repos_json}.f"
   mv "${repos_json}.f" "$repos_json"
+fi
+
+# Drop private repos unless explicitly opted in. Done here, before any PR
+# titles or commit SHAs are fetched, so private metadata never enters the
+# pipeline at all. `.private` comes straight from the GitHub repos API.
+if ! $INCLUDE_PRIVATE; then
+  private_count="$(jq '[.[] | select(.private == true)] | length' "$repos_json")"
+  if [[ "${private_count:-0}" -gt 0 ]]; then
+    echo ">> Excluding ${private_count} private repo(s) from public output." >&2
+  fi
+  jq '[.[] | select(.private != true)]' "$repos_json" > "${repos_json}.p"
+  mv "${repos_json}.p" "$repos_json"
 fi
 
 repo_count="$(jq 'length' "$repos_json")"
@@ -243,6 +267,7 @@ while read -r repo_row; do
   i=$((i+1))
   full_name="$(jq -r '.full_name'      <<<"$repo_row")"
   default_branch="$(jq -r '.default_branch' <<<"$repo_row")"
+  is_private="$(jq -r 'if .private == true then "true" else "false" end' <<<"$repo_row")"
   echo "  [$i/$repo_count] $full_name (branch=$default_branch)" >&2
 
   wf_configured="$(has_workflow_configured "$full_name")"
@@ -287,12 +312,14 @@ while read -r repo_row; do
   repo_obj="$(jq -n \
     --arg full_name "$full_name" \
     --arg default_branch "$default_branch" \
+    --argjson private "$is_private" \
     --argjson default_branch_verdict "$default_verdict" \
     --argjson pr_verdicts "$pr_verdicts" \
     --arg worst "$worst" \
     --argjson has_regression "$has_regression" \
     --argjson workflow_configured "$wf_configured" \
     '{full_name:$full_name, default_branch:$default_branch,
+      private:$private,
       default_branch_verdict:$default_branch_verdict,
       pr_verdicts:$pr_verdicts,
       worst_verdict:$worst,

@@ -93,6 +93,15 @@ jobs:
             --${{ steps.scope.outputs.kind }} "${{ steps.scope.outputs.name }}" \
             --out-json site/fleet-verdicts.json
 
+      - name: Assert no private repos in published data
+        run: |
+          set -euo pipefail
+          # Hard gate: refuse to publish if any private repo slipped through.
+          # --require-flag also rejects collector output that predates the
+          # privacy fix (repos with no explicit "private" field).
+          python3 scripts/ci/assert-public-only.py \
+            site/fleet-verdicts.json --require-flag
+
       - name: Render dashboard
         run: |
           set -euo pipefail

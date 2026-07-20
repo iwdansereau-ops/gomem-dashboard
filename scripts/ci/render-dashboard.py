@@ -76,13 +76,22 @@ def load_data(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text())
 
 
+def public_repos(repos: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Defense-in-depth: never render a private repo, even if one slips into the
+    input JSON. collect-verdicts.sh already excludes private repos from public
+    output; this is a second, independent guard on the rendering side so the
+    published HTML/Markdown can never leak a private repo name, PR title, or SHA.
+    """
+    return [r for r in repos if r.get("private") is not True]
+
+
 # ─────────────────────────────────────────────────────────── Markdown renderer
 
 def render_markdown(data: dict[str, Any], include_unknown: bool) -> str:
     counts = data.get("counts", {})
     generated = data.get("generated_at", "?")
     scope = data.get("scope", "?")
-    repos = data.get("repos", [])
+    repos = public_repos(data.get("repos", []))
 
     surface = {v for v in REGRESSION_VERDICTS}
     if include_unknown:
@@ -262,7 +271,7 @@ def render_html(data: dict[str, Any], include_unknown: bool) -> str:
     counts = data.get("counts", {})
     generated = data.get("generated_at", "?")
     scope = data.get("scope", "?")
-    repos = data.get("repos", [])
+    repos = public_repos(data.get("repos", []))
 
     surface = {v for v in REGRESSION_VERDICTS}
     if include_unknown:

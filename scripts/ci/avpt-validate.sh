@@ -55,6 +55,18 @@ else
   log "python3 not found — skipping evaluator dry-run."
 fi
 
+# Privacy invariant: private repos must never reach public fleet output.
+if command -v python3 >/dev/null 2>&1; then
+  log "Byte-compiling fleet dashboard scripts"
+  python3 -m py_compile scripts/ci/render-dashboard.py scripts/ci/assert-public-only.py || fail=1
+  log "Running privacy regression tests"
+  python3 -m unittest discover -s scripts/ci/tests -p 'test_*.py' || fail=1
+  log "Asserting committed snapshot contains no private repos"
+  python3 scripts/ci/assert-public-only.py .dashboard/last-verdicts.json --require-flag || fail=1
+else
+  log "python3 not found — skipping privacy tests."
+fi
+
 if [[ "$fail" -ne 0 ]]; then
   log "VALIDATE FAILED"
   exit 1
