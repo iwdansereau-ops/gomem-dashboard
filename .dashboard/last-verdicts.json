@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T01:39:25Z",
+  "generated_at": "2026-07-21T02:44:28Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -9,8 +9,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "402d86be8b3bbbbd4f300aaeac4a89b9ddecc37d",
-        "short_sha": "402d86b",
+        "sha": "b214d63530d009588ae2bd7684df107d69a83fc9",
+        "short_sha": "b214d63",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -66,8 +66,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "2ecdcddd4b6999fb3b5f4414f510267c28f6b191",
-        "short_sha": "2ecdcdd",
+        "sha": "7b623cde4ba14ced645611bb4e46bc0b35389bd5",
+        "short_sha": "7b623cd",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -75,6 +75,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "3760dece7e85046470cfaa8c911d8b6a3d49e05d",
+          "short_sha": "3760dec",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 24,
+          "pr_title": "fix: public-readiness pass — resolve broken System-map reference, a11y & SEO",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/24"
+        },
         {
           "verdict": "NONE",
           "state": "none",
@@ -116,20 +130,6 @@
           "pr_number": 19,
           "pr_title": "harden: GitHub Pages custom-domain preflight, security policy, and console validation tests",
           "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/19"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "124dab7344d018f5dd3012e98880c98dcdf0fdf8",
-          "short_sha": "124dab7",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 18,
-          "pr_title": "harden: GitHub Pages custom-domain preflight for console.odisena.com",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/18"
         },
         {
           "verdict": "NONE",
