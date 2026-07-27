@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T21:39:33Z",
+  "generated_at": "2026-07-27T22:48:37Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -9,8 +9,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "e8d54e0d080eb91dcd4e04325b60c25d761fad8f",
-        "short_sha": "e8d54e0",
+        "sha": "274d6fed339126421f94307dd1533add8613e0ec",
+        "short_sha": "274d6fe",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -75,6 +75,20 @@
         "worst_bytes": null
       },
       "pr_verdicts": [
+        {
+          "verdict": "NONE",
+          "state": "none",
+          "sha": "30abf532034490c62c2875f4bb0b7ab023face87",
+          "short_sha": "30abf53",
+          "description": null,
+          "target_url": null,
+          "updated_at": null,
+          "worst_function": null,
+          "worst_bytes": null,
+          "pr_number": 26,
+          "pr_title": "Strip dead asset refs from archived artifacts, add static-snapshot notes",
+          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/26"
+        },
         {
           "verdict": "NONE",
           "state": "none",
