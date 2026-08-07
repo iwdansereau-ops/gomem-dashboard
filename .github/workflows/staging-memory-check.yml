@@ -12,6 +12,11 @@ name: staging-memory-check
 
 on:
   deployment_status:
+  # pull_request runs stamp the `staging-memory-check/verdict` required check
+  # on the PR head: neutral success while no pprof endpoint is configured,
+  # pending ("awaiting staging deployment") once it is. Without this trigger
+  # PR heads can never receive the status and branch protection deadlocks.
+  pull_request:
   workflow_dispatch:
     inputs:
       sha:
