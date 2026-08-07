@@ -149,9 +149,105 @@ jobs:
             echo "::notice title=staging-memory-check skipped::No pprof endpoint configured. Set the STAGING_PPROF_URL repo secret (or pass override_pprof_url on manual dispatch) to enable the staging memory gate."
           fi
 
+      # ── Neutral verdict when the gate cannot run ─────────────────────
+      # `staging-memory-check/verdict` may be a required check in branch
+      # protection. When no pprof endpoint is configured the gate can never
+      # report, which would deadlock every PR behind an admin override.
+      # Publish a *neutral* success status ("skipped: not configured") on
+      # the open PR head so PRs merge normally. The context stays
+      # meaningful once staging is wired up: real verdicts (and the
+      # "awaiting staging deployment" pending state below) overwrite it.
+      - name: Resolve status target SHA
+        id: target
+        if: steps.check.outputs.configured == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          TARGET_SHA=""
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            TARGET_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            # deployment_status / workflow_dispatch / workflow_run: stamp the
+            # open PR associated with the relevant commit, if one exists.
+            if [[ -n "${{ inputs.override_sha }}" ]]; then
+              SHA="${{ inputs.override_sha }}"
+            elif [[ "${{ github.event_name }}" == "deployment_status" ]]; then
+              SHA="${{ github.event.deployment.sha }}"
+            elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+              SHA="${{ github.event.workflow_run.head_sha }}"
+            else
+              SHA="${{ github.sha }}"
+            fi
+            TARGET_SHA=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/${GITHUB_REPOSITORY}/commits/${SHA}/pulls" \
+              --jq '[.[] | select(.state=="open")][0].head.sha // empty')
+          fi
+          echo "sha=$TARGET_SHA" >> "$GITHUB_OUTPUT"
+          if [[ -z "$TARGET_SHA" ]]; then
+            echo "No open PR to stamp — skipping neutral status publication."
+          fi
+
+      - name: Publish neutral verdict status (gate skipped)
+        if: >
+          steps.check.outputs.configured == 'false' &&
+          steps.target.outputs.sha != '' &&
+          (github.event_name != 'pull_request' ||
+           github.event.pull_request.head.repo.full_name == github.repository)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          TARGET_SHA: ${{ steps.target.outputs.sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          CONTEXT: ${{ inputs.status_context }}
+        run: |
+          set -euo pipefail
+          DESC="Neutral: memory gate skipped — no staging pprof endpoint configured."
+          DESC="${DESC:0:140}"
+          echo "Publishing neutral status: context=$CONTEXT sha=$TARGET_SHA"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${TARGET_SHA}" \
+            -f state="success" \
+            -f context="$CONTEXT" \
+            -f description="$DESC" \
+            -f target_url="$RUN_URL"
+
+      # ── Pending verdict on PRs once staging IS configured ────────────
+      # pull_request events never run the memory gate (there is no staging
+      # deployment to measure). When an endpoint is configured, mark the PR
+      # pending so the required check waits for the real verdict from the
+      # deployment_status-triggered run instead of passing vacuously.
+      - name: Publish pending verdict status (awaiting staging deploy)
+        if: >
+          steps.check.outputs.configured == 'true' &&
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha }}
+          RUN_URL: ${{ format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          CONTEXT: ${{ inputs.status_context }}
+        run: |
+          set -euo pipefail
+          DESC="Awaiting staging deployment of this PR — verdict publishes after the memory gate runs."
+          DESC="${DESC:0:140}"
+          echo "Publishing pending status: context=$CONTEXT sha=$TARGET_SHA"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GITHUB_REPOSITORY}/statuses/${TARGET_SHA}" \
+            -f state="pending" \
+            -f context="$CONTEXT" \
+            -f description="$DESC" \
+            -f target_url="$RUN_URL"
+
   memory-check:
     needs: preflight
-    if: needs.preflight.outputs.configured == 'true'
+    # pull_request events only stamp a status (neutral or pending) — the
+    # gate itself needs an actual deployment (or manual dispatch) to measure.
+    if: needs.preflight.outputs.configured == 'true' && github.event_name != 'pull_request'
     runs-on: ${{ inputs.runs_on }}
     timeout-minutes: 30
 
