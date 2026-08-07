@@ -31,6 +31,12 @@ concurrency:
 
 jobs:
   check:
+    permissions:
+      contents: read
+      pull-requests: write
+      deployments: read
+      actions: read
+      statuses: write
     # Dogfood: this repo points at its own workflow_call file at HEAD of the
     # default branch so changes to the reusable workflow are self-testing.
     # Downstream repos should pin a released tag (`@v1`) instead.
