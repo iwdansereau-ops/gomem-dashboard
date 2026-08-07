@@ -10,9 +10,15 @@
 #   DASHBOARD_SCOPE_KIND   "org" or "user"    (default: "user")
 #   DASHBOARD_SCOPE_NAME   org / user handle  (default: repo owner)
 #
-# Requires a repo secret FLEET_SCAN_TOKEN — a fine-grained PAT with repo:read
-# for all repos you want scanned. GITHUB_TOKEN is scoped to only this repo and
-# cannot see siblings.
+# Cross-repo authentication uses a GitHub App installation token minted at
+# job start via actions/create-github-app-token, so no long-lived PAT is
+# stored anywhere. Configure once at the org level:
+#   Variable  FLEET_SCAN_APP_ID    numeric App ID of the fleet-scan-reader App
+#   Secret    FLEET_SCAN_APP_KEY   full .pem private key contents
+# Install the App on every repo you want scanned (read-only Contents,
+# Metadata, Commit statuses, Pull requests, Actions). GITHUB_TOKEN is
+# scoped to only this repo and cannot see siblings, so it remains a
+# self-scoped dry-run fallback only.
 #
 # The dashboard is published to gh-pages at /index.html and /fleet-verdicts.json.
 
@@ -82,10 +88,26 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends jq
 
+      # Mint a short-lived (≤1h) GitHub App installation token via OIDC.
+      # No long-lived PAT is stored: the App private key produces a scoped
+      # token that is revoked at job end.
+      - name: Mint fleet-scan installation token
+        id: fleet_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id:      ${{ vars.FLEET_SCAN_APP_ID }}
+          private-key: ${{ secrets.FLEET_SCAN_APP_KEY }}
+          owner:       ${{ github.repository_owner }}
+          # Omit `repositories:` to inherit the App's install scope
+          # (every repo it's installed on). Pin explicitly here if you
+          # want to narrow the token further per run.
+
       - name: Collect fleet verdicts
         env:
-          # Fall back to GITHUB_TOKEN if PAT missing (won't cover other repos)
-          GH_TOKEN: ${{ secrets.FLEET_SCAN_TOKEN || secrets.GITHUB_TOKEN }}
+          # Prefer the App-installation token (cross-repo, short-lived).
+          # Fall back to GITHUB_TOKEN only when the App isn't configured yet,
+          # which yields a self-scoped dry-run (siblings won't be visible).
+          GH_TOKEN: ${{ steps.fleet_token.outputs.token || secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p site
