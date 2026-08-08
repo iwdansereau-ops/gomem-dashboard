@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T13:15:21Z",
+  "generated_at": "2026-08-08T13:10:29Z",
   "scope": "user/iwdansereau-ops",
   "repos": [
     {
@@ -9,8 +9,8 @@
       "default_branch_verdict": {
         "verdict": "NONE",
         "state": "none",
-        "sha": "2c10277c05cdf5b3e3daf1c22f6a22b1e24a69a6",
-        "short_sha": "2c10277",
+        "sha": "1ce01f97d12233d1a8226e24961efb1d266ed904",
+        "short_sha": "1ce01f9",
         "description": null,
         "target_url": null,
         "updated_at": null,
@@ -54,98 +54,6 @@
         "worst_bytes": null
       },
       "pr_verdicts": [],
-      "worst_verdict": "NONE",
-      "has_regression": false,
-      "workflow_configured": false,
-      "notes": null
-    },
-    {
-      "full_name": "iwdansereau-ops/odisena-console",
-      "default_branch": "main",
-      "private": false,
-      "default_branch_verdict": {
-        "verdict": "NONE",
-        "state": "none",
-        "sha": "263d4d9fe69143dc96f538e7bc53e9614d99e0d1",
-        "short_sha": "263d4d9",
-        "description": null,
-        "target_url": null,
-        "updated_at": null,
-        "worst_function": null,
-        "worst_bytes": null
-      },
-      "pr_verdicts": [
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "9b924370459832c10e6ff4d61d518cd1df5fd064",
-          "short_sha": "9b92437",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 22,
-          "pr_title": "Add Odisena brand ownership, trust/provenance, and public-readiness metadata",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/22"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "7f97d18c422662560aa6a2da027a2f88acb52be8",
-          "short_sha": "7f97d18",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 21,
-          "pr_title": "Align public founder identity with LinkedIn",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/21"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "edc836c71ee2b85bab89ce6c9cb68ee39d7a79ff",
-          "short_sha": "edc836c",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 19,
-          "pr_title": "harden: GitHub Pages custom-domain preflight, security policy, and console validation tests",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/19"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "79be38dc87a3e2decff38dc8b3259cddb97aa0d0",
-          "short_sha": "79be38d",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 10,
-          "pr_title": "v9 canonicalization mirror: Layer-1 lineage panel + execution-track panel",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/10"
-        },
-        {
-          "verdict": "NONE",
-          "state": "none",
-          "sha": "c91e39a2490ebef9191a5fab2bc83d3f0de6293f",
-          "short_sha": "c91e39a",
-          "description": null,
-          "target_url": null,
-          "updated_at": null,
-          "worst_function": null,
-          "worst_bytes": null,
-          "pr_number": 1,
-          "pr_title": "Add Odisena Netlify CI/CD pipeline (setup, not yet active)",
-          "pr_url": "https://github.com/iwdansereau-ops/odisena-console/pull/1"
-        }
-      ],
       "worst_verdict": "NONE",
       "has_regression": false,
       "workflow_configured": false,
@@ -216,11 +124,11 @@
     }
   ],
   "counts": {
-    "total": 6,
+    "total": 5,
     "with_workflow": 1,
     "regressing": 0,
     "clean": 0,
     "unknown": 0,
-    "no_data": 6
+    "no_data": 5
   }
 }
